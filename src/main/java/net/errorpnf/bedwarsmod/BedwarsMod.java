@@ -1,6 +1,11 @@
 package net.errorpnf.bedwarsmod;
 
+import cc.polyfrost.oneconfig.utils.commands.CommandManager;
+import net.errorpnf.bedwarsmod.commands.MyCommand;
 import net.errorpnf.bedwarsmod.config.BedwarsModConfig;
+import net.errorpnf.bedwarsmod.utils.FinalKillHearts;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
@@ -25,5 +30,7 @@ public class BedwarsMod {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         config = new BedwarsModConfig();
+        MinecraftForge.EVENT_BUS.register(new FinalKillHearts());
+        ClientCommandHandler.instance.registerCommand(new MyCommand());
     }
 }
