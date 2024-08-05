@@ -2,7 +2,7 @@
   {
     "modid": "${id}",
     "name": "${name}",
-    "description": "",
+    "description": "A QOL and enhancement mod for Hypixel Bedwars.",
     "version": "${version}",
     "mcversion": "${mcVersionStr}",
     "url": "",
