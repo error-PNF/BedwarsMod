@@ -19,12 +19,6 @@ public class BedwarsMod {
     public static BedwarsMod INSTANCE; // Adds the instance of the mod, so we can access other variables.
     public static BedwarsModConfig config;
 
-    // Roll a new nickname: /nick help setrandom
-    // Claim the nickname: /nick actuallyset <generated username from above>
-    // Set Rank: /nick rank <rank>
-
-    //TODO Make sure people are already nicked before they can use /betternick stuff. Default /betternick to just /nick maybe? something like that
-
 
     // Register the config and commands.
     @Mod.EventHandler
