@@ -17,6 +17,7 @@ plugins {
     java
 }
 
+
 // Gets the mod name, version and id from the `gradle.properties` file.
 val mod_name: String by project
 val mod_version: String by project
@@ -72,12 +73,13 @@ val shade: Configuration by configurations.creating {
     configurations.implementation.get().extendsFrom(this)
 }
 
+val modShade: Configuration by configurations.creating {
+    configurations.modImplementation.get().extendsFrom(this)
+}
+
 // Configures the output directory for when building from the `src/resources` directory.
 sourceSets {
-    val dummy by creating
     main {
-        dummy.compileClasspath += compileClasspath
-        compileClasspath += dummy.output
         output.setResourcesDir(java.classesDirectory)
     }
 }
@@ -85,13 +87,18 @@ sourceSets {
 // Adds the Polyfrost maven repository so that we can get the libraries necessary to develop the mod.
 repositories {
     maven("https://repo.polyfrost.org/releases")
+    //maven { url = uri("https://repo.hypixel.net/repository/Hypixel/") }
+}
+
+configurations {
+    shade
 }
 
 // Configures the libraries/dependencies for your mod.
 dependencies {
-    // Adds the OneConfig library, so we can develop with it.
-    modCompileOnly("cc.polyfrost:oneconfig-$platform:0.2.2-alpha+")
+    shade("com.squareup.okhttp3:okhttp:4.9.3")
 
+    modCompileOnly("cc.polyfrost:oneconfig-$platform:0.2.2-alpha+")
     modRuntimeOnly("me.djtheredstoner:DevAuth-${if (platform.isFabric) "fabric" else if (platform.isLegacyForge) "forge-legacy" else "forge-latest"}:1.1.2")
 
     // If we are building for legacy forge, includes the launch wrapper with `shade` as we configured earlier.
