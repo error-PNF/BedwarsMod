@@ -1,0 +1,769 @@
+{
+  "prestiges": {
+    "0": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "1": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§f",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "2": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§6",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "3": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§b",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "4": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§2",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "5": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§3",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "6": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§4",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "7": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§d",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "8": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§9",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "9": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§5",
+        "rightBracket": "",
+        "starColor": "",
+        "numberColors": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "10": {
+      "prestigeName": "",
+      "starSymbol": "✫",
+      "colors": {
+        "leftBracket": "§c",
+        "rightBracket": "§5",
+        "starColor": "§d",
+        "numberColors": [
+          "§6",
+          "§e",
+          "§a",
+          "§b"
+        ]
+      }
+    },
+    "11": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "",
+        "starColor": "§7",
+        "numberColors": [
+          "§f",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "12": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§6",
+        "numberColors": [
+          "§e",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "13": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§3",
+        "numberColors": [
+          "§b",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "14": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§2",
+        "numberColors": [
+          "§a",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "15": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§9",
+        "numberColors": [
+          "§3",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "16": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§4",
+        "numberColors": [
+          "§c",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "17": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§5",
+        "numberColors": [
+          "§d",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "18": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§1",
+        "numberColors": [
+          "§9",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "19": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§7",
+        "rightBracket": "§7",
+        "starColor": "§8",
+        "numberColors": [
+          "§5",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "20": {
+      "prestigeName": "",
+      "starSymbol": "✪",
+      "colors": {
+        "leftBracket": "§8",
+        "rightBracket": "§8",
+        "starColor": "",
+        "numberColors": [
+          "§7",
+          "§f",
+          "",
+          "§7"
+        ]
+      }
+    },
+    "21": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§f",
+        "rightBracket": "§6",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§e",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "22": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§6",
+        "rightBracket": "§3",
+        "starColor": "§3§l",
+        "numberColors": [
+          "",
+          "§f",
+          "",
+          "§b"
+        ]
+      }
+    },
+    "23": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§5",
+        "rightBracket": "§e",
+        "starColor": "§e§l",
+        "numberColors": [
+          "",
+          "§d",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "24": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§b",
+        "rightBracket": "§8",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§f",
+          "",
+          "§7"
+        ]
+      }
+    },
+    "25": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§f",
+        "rightBracket": "§2",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§a",
+          "",
+          "§2"
+        ]
+      }
+    },
+    "26": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§4",
+        "rightBracket": "§d",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§c",
+          "",
+          "§d"
+        ]
+      }
+    },
+    "27": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§e",
+        "rightBracket": "§8",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§f",
+          "",
+          "§8"
+        ]
+      }
+    },
+    "28": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§a",
+        "rightBracket": "§e",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§2",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "29": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§b",
+        "rightBracket": "§1",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§3",
+          "",
+          "§9"
+        ]
+      }
+    },
+    "30": {
+      "prestigeName": "",
+      "starSymbol": "⚝",
+      "colors": {
+        "leftBracket": "§e",
+        "rightBracket": "§4",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§6",
+          "",
+          "§c"
+        ]
+      }
+    },
+    "31": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§9",
+        "rightBracket": "§e",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§2",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "32": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§c",
+        "rightBracket": "§c",
+        "starColor": "§c§l",
+        "numberColors": [
+          "§4",
+          "§7",
+          "",
+          "§4"
+        ]
+      }
+    },
+    "33": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§9",
+        "rightBracket": "§4",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "",
+          "§d",
+          "§c"
+        ]
+      }
+    },
+    "34": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§2",
+        "rightBracket": "§2",
+        "starColor": "§l",
+        "numberColors": [
+          "§a",
+          "§d",
+          "",
+          "§5"
+        ]
+      }
+    },
+    "35": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§c",
+        "rightBracket": "§a",
+        "starColor": "§a§l",
+        "numberColors": [
+          "",
+          "§4",
+          "",
+          "§2"
+        ]
+      }
+    },
+    "36": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§a",
+        "rightBracket": "§1",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "",
+          "§b",
+          "§9"
+        ]
+      }
+    },
+    "37": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§4",
+        "rightBracket": "§3",
+        "starColor": "§3§l",
+        "numberColors": [
+          "",
+          "§c",
+          "",
+          "§b"
+        ]
+      }
+    },
+    "38": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§1",
+        "rightBracket": "§1",
+        "starColor": "§d§l",
+        "numberColors": [
+          "",
+          "§9",
+          "§5",
+          ""
+        ]
+      }
+    },
+    "39": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§c",
+        "rightBracket": "§9",
+        "starColor": "§9§l",
+        "numberColors": [
+          "",
+          "§a",
+          "",
+          "§3"
+        ]
+      }
+    },
+    "40": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§5",
+        "rightBracket": "§e",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§c",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "41": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§e",
+        "rightBracket": "§5",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§6",
+          "§c",
+          "§d"
+        ]
+      }
+    },
+    "42": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§1",
+        "rightBracket": "§7",
+        "starColor": "§7§l",
+        "numberColors": [
+          "§9",
+          "§3",
+          "§b",
+          "§f"
+        ]
+      }
+    },
+    "43": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§0",
+        "rightBracket": "§0",
+        "starColor": "§l",
+        "numberColors": [
+          "§5",
+          "§8",
+          "",
+          "§5"
+        ]
+      }
+    },
+    "44": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§2",
+        "rightBracket": "§d",
+        "starColor": "§5§l",
+        "numberColors": [
+          "",
+          "§a",
+          "§e",
+          "§6"
+        ]
+      }
+    },
+    "45": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§f",
+        "rightBracket": "§2",
+        "starColor": "§l",
+        "numberColors": [
+          "",
+          "§b",
+          "",
+          "§2"
+        ]
+      }
+    },
+    "46": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§2",
+        "rightBracket": "§5",
+        "starColor": "§d§l",
+        "numberColors": [
+          "§b",
+          "§e",
+          "",
+          "§6"
+        ]
+      }
+    },
+    "47": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§f",
+        "rightBracket": "§9",
+        "starColor": "§1§l",
+        "numberColors": [
+          "§4",
+          "§c",
+          "",
+          "§9"
+        ]
+      }
+    },
+    "48": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§5",
+        "rightBracket": "§3",
+        "starColor": "§b§l",
+        "numberColors": [
+          "",
+          "§c",
+          "§6",
+          "§e"
+        ]
+      }
+    },
+    "49": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§2",
+        "rightBracket": "§2",
+        "starColor": "§l",
+        "numberColors": [
+          "§a",
+          "§f",
+          "",
+          "§a"
+        ]
+      }
+    },
+    "50": {
+      "prestigeName": "",
+      "starSymbol": "✥",
+      "colors": {
+        "leftBracket": "§4",
+        "rightBracket": "§0",
+        "starColor": "§1§l",
+        "numberColors": [
+          "",
+          "§5",
+          "§9",
+          ""
+        ]
+      }
+    }
+  }
+}

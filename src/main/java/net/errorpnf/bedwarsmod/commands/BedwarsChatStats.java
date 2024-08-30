@@ -1,20 +1,27 @@
 package net.errorpnf.bedwarsmod.commands;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import net.errorpnf.bedwarsmod.data.GameModeEnum;
+import net.errorpnf.bedwarsmod.data.PrestigeList;
+import net.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
 import net.errorpnf.bedwarsmod.utils.ApiUtils;
 import net.errorpnf.bedwarsmod.utils.StatUtils;
+import net.errorpnf.bedwarsmod.utils.UUIDUtils;
+import net.errorpnf.bedwarsmod.utils.formatting.PrintChatStats;
+import net.errorpnf.bedwarsmod.utils.formatting.RankUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.NumberInvalidException;
 
-import java.io.IOException;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
 
 public class BedwarsChatStats extends CommandBase {
+    public static final String pfx = "&c[&fBW&c] &r";
+
     @Override
     public String getCommandName() {
         return "bws";
@@ -32,84 +39,50 @@ public class BedwarsChatStats extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-
+        String username;
         if (args.length < 1) {
-            throw new CommandException("Usage: " + getCommandUsage(sender));
+            username = Minecraft.getMinecraft().thePlayer.getName();
+        } else {
+            username = args[0];
         }
 
-        String username = args[0];
-        UChat.chat("&aFetching Stats for &3" + username + "&a...");
+        JsonObject cachedData = ApiCacheManager.getCachedRequest(username);
+        if (cachedData != null) {
+            StatUtils s = new StatUtils(cachedData);
+            String displayUsername = s.getStat("player.displayname");
 
-        ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
-            StatUtils s = new StatUtils(jsonObject);
+            UChat.chat("&aUsing cached data for &3" + RankUtils.formatRankAndUsername(displayUsername, cachedData) + "&a.");
 
-            UChat.chat("&aYou are viewing &3" + username + "'s &astats!");
-            UChat.chat("&aBedwars Level: &3" + s.getStat("player.achievements.bedwars_level") + "✫");
-            UChat.chat("&aBedwars Kills: &3" + s.getStat("player.stats.Bedwars.kills_bedwars"));
-            UChat.chat("&aBedwars Deaths: &3" + s.getStat("player.stats.Bedwars.deaths_bedwars"));
-            UChat.chat("&aBedwars Wins: &3" + s.getStat("player.achievements.bedwars_wins"));
-            UChat.chat("&aBedwars Losses: &3" + s.getStat("player.stats.Bedwars.losses"));
+            PrintChatStats.printChatStats(username, cachedData);
+        } else {
+            UChat.chat("&aFetching Stats for &3" + username + "&a...");
+            ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
+                ApiCacheManager.cacheRequest(username, jsonObject);
 
-        }).exceptionally(throwable -> {
-            throwable.printStackTrace();
-            return null;
-        });
+                PrintChatStats.printChatStats(username, jsonObject);
+            }).exceptionally(throwable -> {
+                throwable.printStackTrace();
+                UChat.chat("&cError fetching data for &a" + username + "&c. Did you spell their username correctly?");
+                return null;
+            });
+        }
+    }
 
+    private void prettyStats(String username, JsonObject jsonObject) {
+        StatUtils s = new StatUtils(jsonObject);
+        PrestigeList prestigeList = new PrestigeList();
+        String formattedStar = prestigeList.getPrestige(Integer.parseInt(s.getStat("player.achievements.bedwars_level")));
 
-
-
-//        CompletableFuture<UUID> futureUUID = ApiUtils.getPlayerUUIDAsync(username);
-//        futureUUID.thenAccept(uuid -> {
-//            UChat.chat("&aUUID for " + username + ": " + uuid.toString());
-//        }).exceptionally(throwable -> {
-//            UChat.chat("Failed to fetch UUID for " + username + ": " + throwable.getMessage());
-//            return null;
-//        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        uuidFuture.thenCompose(playerUuid -> {
-//            return CompletableFuture.supplyAsync(() -> {
-//                try {
-//                    return ApiUtils.API.getPlayerByUuid(playerUuid).get();
-//                } catch (ExecutionException | InterruptedException e) {
-//                    throw new CompletionException(e);
-//                }
-//            });
-//        }).thenAccept(apiReply -> {
-//            PlayerReply.Player player = apiReply.getPlayer();
-//            if (!player.exists()) {
-//                UChat.chat("Player not found!");
-//                return;
-//            }
-//
-//            UChat.chat("You are viewing " + player.getName() + "'s stats!");
-//            UChat.chat("");
-//            UChat.chat("UUID: " + player.getUuid());
-//            UChat.chat("Bedwars Level: " + player.getIntProperty("achievements.bedwars_level", 0) + "✫");
-//            UChat.chat("Bedwars Kills: " + player.getIntProperty("stats.Bedwars.kills_bedwars", 0));
-//            UChat.chat("Bedwars Deaths: " + player.getIntProperty("stats.Bedwars.deaths_bedwars", 0));
-//            UChat.chat("Bedwars Wins: " + player.getIntProperty("achievements.bedwars_wins", 0));
-//            UChat.chat("Bedwars Losses: " + player.getIntProperty("stats.Bedwars.wins_bedwars", 0));
-//
-//            UChat.chat("Rate Limit: " + apiReply.getRateLimit());
-//        }).exceptionally(ex -> {
-//            UChat.chat("Oh no, something went wrong!");
-//            ex.printStackTrace();
-//            return null;
-//        });
+        UChat.chat(pfx + "&7Overall stats for " + RankUtils.formatRankAndUsername(username, jsonObject));
+        UChat.chat(pfx + "&7Bedwars Level: &a" +  formattedStar);
+        UChat.chat(pfx + "&7Bedwars Kills: &a" + s.getStat("player.stats.Bedwars.kills_bedwars"));
+        UChat.chat(pfx + "&7Bedwars Deaths: &a" + s.getStat("player.stats.Bedwars.deaths_bedwars"));
+        UChat.chat(pfx + "&7Bedwars Wins: &a" + s.getStat("player.achievements.bedwars_wins"));
+        UChat.chat(pfx + "&7Bedwars Losses: &a" + s.getStat("player.stats.Bedwars.losses_bedwars"));
+        UChat.chat("");
+        UChat.chat(s.getStat("player.socialMedia.links.TIKTOK"));
+        UChat.chat(s.getStat("player.socialMedia.links.DISCORD"));
+        UChat.chat(s.getStat("player.socialMedia.links.HYPIXEL"));
+        UChat.chat(s.getStat("player.socialMedia.links.YOUTUBE"));
     }
 }

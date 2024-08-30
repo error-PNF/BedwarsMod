@@ -2,8 +2,18 @@ package net.errorpnf.bedwarsmod.utils.profileviewer;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import cc.polyfrost.oneconfig.libs.universal.UMatrixStack;
+import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
+import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
+import net.errorpnf.bedwarsmod.data.BedwarsExperience;
+import net.errorpnf.bedwarsmod.data.PrestigeList;
+import net.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
+import net.errorpnf.bedwarsmod.data.stats.Stats;
 import net.errorpnf.bedwarsmod.utils.ApiUtils;
+import net.errorpnf.bedwarsmod.utils.JsonUtils;
+import net.errorpnf.bedwarsmod.utils.StatUtils;
+import net.errorpnf.bedwarsmod.utils.UUIDUtils;
+import net.errorpnf.bedwarsmod.utils.formatting.RankUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.gui.FontRenderer;
@@ -32,14 +42,15 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class PVGui extends GuiScreen {
-    private int sizeX = 430;
-    private int sizeY = 224;
+    private final int sizeX = 430;
+    private final int sizeY = 224;
     private GuiButton button;
     private static int guiLeft;
     private static int guiTop;
@@ -48,10 +59,15 @@ public class PVGui extends GuiScreen {
     private ResourceLocation playerLocationSkin = null;
     private ResourceLocation playerLocationCape = null;
     private String skinType = null;
-    private boolean loadingProfile = false;
 
-    public String username = "LuckyBlockBW";
 
+    private String username;
+    private JsonObject playerData;
+
+    public PVGui(String username, JsonObject playerData) {
+        this.username = username;
+        this.playerData = playerData;
+    }
 
 
     @Override
@@ -89,9 +105,12 @@ public class PVGui extends GuiScreen {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(pv_bg);
         drawTexturedRect(guiLeft, guiTop, sizeX, sizeY, GL11.GL_NEAREST);
-        fontRendererObj.drawString("Profile Viewer", 130, 45, 1);
 
         renderDrawnEntity(mouseX, mouseY, partialTicks);
+
+        renderTopCard(guiLeft + (365f * 2f/3f), guiTop + 20, 2, mouseX, mouseY);
+        PlayerSocials playerSocials = new PlayerSocials(playerData, username);
+        playerSocials.drawTextures(guiLeft + 61.75f, guiTop + 181.875f, mouseX, mouseY);
     }
 
     @Override
@@ -364,28 +383,43 @@ public class PVGui extends GuiScreen {
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         GlStateManager.popMatrix();
 
+
+
         if (entityPlayer == null) {
-            CompletableFuture<UUID> playerUUID = ApiUtils.getPlayerUUIDAsync(username);
-            GameProfile fakeProfile = Minecraft
-                    .getMinecraft()
-                    .getSessionService()
-                    .fillProfileProperties(new GameProfile(playerUUID.getNow(UUID.fromString("0c063bfd-3521-413d-a766-50be1d71f00e")), "CoolGuy123"), false);
-            entityPlayer =
-                    new EntityOtherPlayerMP(Minecraft.getMinecraft().theWorld, fakeProfile) {
-                        public ResourceLocation getLocationSkin() {
-                            return playerLocationSkin == null
-                                    ? DefaultPlayerSkin.getDefaultSkin(this.getUniqueID())
-                                    : playerLocationSkin;
-                        }
+            JsonObject apiReq = playerData;
+            StatUtils profile = new StatUtils(apiReq);
+            UUID formattedPlayerUUID = UUID.fromString("c1e37905-4760-48e1-8eb0-e487c9108062");
+            String profileName = username;
 
-                        public ResourceLocation getLocationCape() {
-                            return playerLocationCape;
-                        }
+            GameProfile fakeProfile = new GameProfile(formattedPlayerUUID, "EpicDude123");
 
-                        public String getSkinType() {
-                            return skinType == null ? DefaultPlayerSkin.getSkinType(this.getUniqueID()) : skinType;
-                        }
-                    };
+            if (!profileName.equals("") && !JsonUtils.isEmpty(apiReq)) {
+                String uuidString = profile.getStat("player.uuid");
+
+                if (uuidString != null && !uuidString.isEmpty() && UUIDUtils.isUuid(uuidString)) {
+                    formattedPlayerUUID = UUIDUtils.fromTrimmed(uuidString);
+                    fakeProfile = Minecraft.getMinecraft().getSessionService()
+                            .fillProfileProperties(new GameProfile(formattedPlayerUUID, profileName), false);
+                } else {
+                    System.out.println("Invalid or missing UUID: " + uuidString);
+                }
+            }
+
+            entityPlayer = new EntityOtherPlayerMP(Minecraft.getMinecraft().theWorld, fakeProfile) {
+                public ResourceLocation getLocationSkin() {
+                    return playerLocationSkin == null
+                            ? DefaultPlayerSkin.getDefaultSkin(this.getUniqueID())
+                            : playerLocationSkin;
+                }
+
+                public ResourceLocation getLocationCape() {
+                    return playerLocationCape;
+                }
+
+                public String getSkinType() {
+                    return skinType == null ? DefaultPlayerSkin.getSkinType(this.getUniqueID()) : skinType;
+                }
+            };
             entityPlayer.setAlwaysRenderNameTag(false);
             entityPlayer.setCustomNameTag("");
         } else {
@@ -436,5 +470,80 @@ public class PVGui extends GuiScreen {
                     entityPlayer
             );
         }
+    }
+
+    private void renderTopCard(float posX, float posY, int scale, float mouseX, float mouseY) {
+        JsonObject apiReq = playerData;
+        Stats s = new Stats(apiReq);
+
+        String playerNameFormatted = RankUtils.formatRankAndUsername(username, apiReq);
+        String level = "&7Level: " + s.formattedStar;
+        String expProgress = "&7EXP Progress: &b" + s.currentLevelExperience + "&7/&a" + s.expReqToLevelUp;
+        String progressToNextLevel = s.formattedStar + BedwarsExperience.getProgressBar(s.exp) + s.formattedStarPlusOne;
+
+        drawStringCentered(fontRendererObj,formatText(playerNameFormatted), posX, posY - 5f, true, 0);
+        drawStringCentered(fontRendererObj, formatText(level), posX, posY + 7f, true, 0);
+        drawStringCentered(fontRendererObj, formatText(expProgress), posX, posY + 19f, true, 0);
+        drawStringCentered(fontRendererObj, formatText(progressToNextLevel), posX, posY + 31f, true, 0);
+
+    }
+
+
+    private String formatText(String text) {
+        // Replace color codes with Minecraft's color format
+        return text.replace("&", "\u00A7");
+    }
+
+
+    private static void drawStringCentered(FontRenderer fr, String str, float x, float y, boolean shadow, int colour) {
+        int strLen = fr.getStringWidth(str);
+
+        float x2 = x - strLen / 2f;
+        float y2 = y - fr.FONT_HEIGHT / 2f;
+
+        GL11.glTranslatef(x2, y2, 0);
+        fr.drawString(str, 0, 0, colour, shadow);
+        GL11.glTranslatef(-x2, -y2, 0);
+    }
+
+    public static void drawStringCenteredScaledMaxWidth(
+            String str,
+            FontRenderer fr,
+            float x,
+            float y,
+            boolean shadow,
+            int len,
+            int colour
+    ) {
+        int strLen = fr.getStringWidth(str);
+        float factor = len / (float) strLen;
+        factor = Math.min(1, factor);
+        int newLen = Math.min(strLen, len);
+
+        float fontHeight = 8 * factor;
+
+        drawStringScaled(fr, str, x - newLen / 2, y - fontHeight / 2, shadow, colour, factor);
+    }
+
+    public static void drawStringScaled(
+            FontRenderer fr,
+            String str,
+            float x,
+            float y,
+            boolean shadow,
+            int colour,
+            float scale
+    ) {
+
+        int strLen = fr.getStringWidth(str);
+
+        float x2 = x - strLen / 2f;
+        float y2 = y - fr.FONT_HEIGHT / 2f;
+
+        GL11.glTranslatef(x2, y2, 0);
+        GlStateManager.scale(scale, scale, 1);
+        fr.drawString(str, x / scale, y / scale, colour, shadow);
+        GlStateManager.scale(1 / scale, 1 / scale, 1);
+        GL11.glTranslatef(-x2, -y2, 0);
     }
 }

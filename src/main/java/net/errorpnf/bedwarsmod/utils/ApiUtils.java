@@ -2,6 +2,7 @@ package net.errorpnf.bedwarsmod.utils;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.*;
+import net.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -31,6 +32,8 @@ public class ApiUtils {
 //    }
 
 
+
+    public static JsonObject lastApiResponse = null;
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final Gson gson = new Gson();
@@ -111,6 +114,10 @@ public class ApiUtils {
                 try {
                     JsonParser parser = new JsonParser();
                     JsonObject jsonObject = parser.parse(responseBody).getAsJsonObject();
+
+                    // stores this api json object to be accessible by other classes
+                    ApiCacheManager.cacheRequest(username, jsonObject);
+
                     future.complete(jsonObject);
                 } catch (Exception e) {
                     future.completeExceptionally(e);
@@ -119,5 +126,18 @@ public class ApiUtils {
         });
 
         return future;
+    }
+
+
+    public static String formatUUIDWithHyphens(String uuidWithoutHyphens) {
+        if (uuidWithoutHyphens == null || uuidWithoutHyphens.length() != 32) {
+            throw new IllegalArgumentException("Invalid UUID string. Must be 32 characters long.");
+        }
+
+        // Insert hyphens at the appropriate positions
+        return uuidWithoutHyphens.replaceFirst(
+                "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
+                "$1-$2-$3-$4-$5"
+        );
     }
 }

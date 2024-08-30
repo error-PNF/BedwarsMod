@@ -18,10 +18,10 @@ public class StatUtils {
             if (statElement != null && statElement.isJsonObject()) {
                 statElement = statElement.getAsJsonObject().get(key);
             } else {
-                return "Stat not found";
+                return "0";
             }
         }
 
-        return statElement != null && !statElement.isJsonNull() ? statElement.getAsString() : "Stat not found";
+        return statElement != null && !statElement.isJsonNull() ? statElement.getAsString() : "0";
     }
 }
