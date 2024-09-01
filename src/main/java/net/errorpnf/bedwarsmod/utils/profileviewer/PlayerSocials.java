@@ -240,7 +240,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean tiktok() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.TIKTOK");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[0] = stat;
             return true;
         }
@@ -250,7 +250,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean twitch() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.TWITCH");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[1] = stat;
             return true;
         }
@@ -260,7 +260,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean discord() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.DISCORD");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[2] = stat;
             return true;
         }
@@ -270,7 +270,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean hypixel() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.HYPIXEL");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[3] = stat;
             return true;
         }
@@ -280,7 +280,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean twitter() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.TWITTER");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[4] = stat;
             return true;
         }
@@ -290,7 +290,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean youtube() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.YOUTUBE");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[5] = stat;
             return true;
         }
@@ -300,7 +300,7 @@ public class PlayerSocials extends GuiScreen {
     private boolean instagram() {
         StatUtils s = new StatUtils(jsonObject);
         String stat = s.getStat("player.socialMedia.links.INSTAGRAM");
-        if (!stat.isEmpty() && !stat.equals("Stat not found")) {
+        if (!stat.isEmpty() && !stat.equals("0")) {
             urls[6] = stat;
             return true;
         }

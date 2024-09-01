@@ -6,6 +6,7 @@ import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import net.errorpnf.bedwarsmod.data.BedwarsExperience;
+import net.errorpnf.bedwarsmod.data.GameModeEnum;
 import net.errorpnf.bedwarsmod.data.PrestigeList;
 import net.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
 import net.errorpnf.bedwarsmod.data.stats.Stats;
@@ -19,6 +20,7 @@ import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -63,18 +65,27 @@ public class PVGui extends GuiScreen {
 
     private String username;
     private JsonObject playerData;
+    private GameModeEnum gamemode;
 
-    public PVGui(String username, JsonObject playerData) {
+    public PVGui(String username, JsonObject playerData, GameModeEnum gamemode) {
         this.username = username;
         this.playerData = playerData;
+        this.gamemode = gamemode;
     }
+
 
 
     @Override
     public void initGui() {
         super.initGui();
-        button = new GuiButton(0, 20, 10, "butts");
-        buttonList.add(button);
+
+
+        // Create and set up the text field
+//        textField = new GuiTextField(1, this.fontRendererObj, guiLeft + 32, guiTop + 211, 110, 19);
+//        textField.setMaxStringLength(100); // Set the maximum length of the text
+//        textField.setFocused(false); // Make the text field focused by default
+//        textField.setText("Search..."); // Set initial text (empty)
+//        textField.setEnableBackgroundDrawing(true);
     }
 
     @Override
@@ -113,13 +124,7 @@ public class PVGui extends GuiScreen {
         playerSocials.drawTextures(guiLeft + 61.75f, guiTop + 181.875f, mouseX, mouseY);
     }
 
-    @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
-        if (button == this.button) {
-            UChat.chat("Button has been pressed");
-        }
-        super.actionPerformed(button);
-    }
+
 
     @Override
     public boolean doesGuiPauseGame() {
@@ -474,7 +479,7 @@ public class PVGui extends GuiScreen {
 
     private void renderTopCard(float posX, float posY, int scale, float mouseX, float mouseY) {
         JsonObject apiReq = playerData;
-        Stats s = new Stats(apiReq);
+        Stats s = new Stats(apiReq, gamemode);
 
         String playerNameFormatted = RankUtils.formatRankAndUsername(username, apiReq);
         String level = "&7Level: " + s.formattedStar;
@@ -546,4 +551,15 @@ public class PVGui extends GuiScreen {
         GlStateManager.scale(1 / scale, 1 / scale, 1);
         GL11.glTranslatef(-x2, -y2, 0);
     }
+
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+    }
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
 }

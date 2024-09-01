@@ -3,6 +3,7 @@ package net.errorpnf.bedwarsmod.commands;
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
 import net.errorpnf.bedwarsmod.BedwarsMod;
+import net.errorpnf.bedwarsmod.data.GameModeEnum;
 import net.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
 import net.errorpnf.bedwarsmod.utils.ApiUtils;
 import net.errorpnf.bedwarsmod.utils.StatUtils;
@@ -37,14 +38,16 @@ public class PVCommand extends CommandBase {
             username = args[0];
         }
 
+        GameModeEnum gamemode = GameModeEnum.OVERALL;
+
         JsonObject cachedData = ApiCacheManager.getCachedRequest(username);
         if (cachedData != null) {
             StatUtils s = new StatUtils(cachedData);
             String displayUsername = s.getStat("player.displayname");
 
-            UChat.chat("&aUsing cached data for &3" + RankUtils.formatRankAndUsername(displayUsername, cachedData) + "&a.");
+            //UChat.chat("&aUsing cached data for &3" + RankUtils.formatRankAndUsername(displayUsername, cachedData) + "&a.");
 
-            BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, cachedData);
+            BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, cachedData, gamemode);
         } else {
             UChat.chat("&aFetching stats for &3" + username + "&a...");
             ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
@@ -55,7 +58,7 @@ public class PVCommand extends CommandBase {
 
                         String displayUsername = s.getStat("player.displayname");
 
-                        BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, jsonObject);
+                        BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, jsonObject, gamemode);
                     } else {
                         UChat.chat("&cError fetching data for &a" + username + "&c. Did you spell their username correctly?");
                     }

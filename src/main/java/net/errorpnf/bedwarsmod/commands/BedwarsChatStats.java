@@ -12,6 +12,7 @@ import net.errorpnf.bedwarsmod.utils.UUIDUtils;
 import net.errorpnf.bedwarsmod.utils.formatting.PrintChatStats;
 import net.errorpnf.bedwarsmod.utils.formatting.RankUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -40,10 +41,27 @@ public class BedwarsChatStats extends CommandBase {
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         String username;
+        GameModeEnum gamemode;
         if (args.length < 1) {
             username = Minecraft.getMinecraft().thePlayer.getName();
         } else {
             username = args[0];
+        }
+
+        if (!(args.length < 2)) {
+            if (args[1].equalsIgnoreCase("fours") || args[1].equalsIgnoreCase("4s")) {
+                gamemode = GameModeEnum.FOUR_FOUR;
+            } else if (args[1].equalsIgnoreCase("threes") || args[1].equalsIgnoreCase("3s")) {
+                gamemode = GameModeEnum.FOUR_THREE;
+            } else if (args[1].equalsIgnoreCase("twos") || args[1].equalsIgnoreCase("2s") || args[1].equalsIgnoreCase("duos") || args[1].equalsIgnoreCase("doubles")) {
+                gamemode = GameModeEnum.EIGHT_TWO;
+            } else if (args[1].equalsIgnoreCase("ones") || args[1].equalsIgnoreCase("1s") || args[1].equalsIgnoreCase("solo") || args[1].equalsIgnoreCase("solos")) {
+                gamemode = GameModeEnum.EIGHT_ONE;
+            } else {
+                gamemode = GameModeEnum.OVERALL;
+            }
+        } else {
+            gamemode = GameModeEnum.OVERALL;
         }
 
         JsonObject cachedData = ApiCacheManager.getCachedRequest(username);
@@ -51,15 +69,15 @@ public class BedwarsChatStats extends CommandBase {
             StatUtils s = new StatUtils(cachedData);
             String displayUsername = s.getStat("player.displayname");
 
-            UChat.chat("&aUsing cached data for &3" + RankUtils.formatRankAndUsername(displayUsername, cachedData) + "&a.");
+            //UChat.chat("&aUsing cached data for &3" + RankUtils.formatRankAndUsername(displayUsername, cachedData) + "&a.");
 
-            PrintChatStats.printChatStats(username, cachedData);
+            PrintChatStats.printChatStats(username, cachedData, gamemode);
         } else {
             UChat.chat("&aFetching Stats for &3" + username + "&a...");
             ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
                 ApiCacheManager.cacheRequest(username, jsonObject);
 
-                PrintChatStats.printChatStats(username, jsonObject);
+                PrintChatStats.printChatStats(username, jsonObject, gamemode);
             }).exceptionally(throwable -> {
                 throwable.printStackTrace();
                 UChat.chat("&cError fetching data for &a" + username + "&c. Did you spell their username correctly?");
