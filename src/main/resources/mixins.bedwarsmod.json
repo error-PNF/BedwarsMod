@@ -1,10 +1,10 @@
 {
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.7",
-  "package": "net.errorpnf.bedwarsmod.mixin",
+  "package": "me.errorpnf.bedwarsmod.mixin",
   "refmap": "mixins.bedwarsmod.refmap.json",
   "verbose": true,
   "client": [
-    "GuiIngameForgeMixin"
+    "me.errorpnf.bedwarsmod.mixin.GuiIngameForgeMixin"
   ]
 }
