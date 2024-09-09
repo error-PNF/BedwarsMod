@@ -5,10 +5,9 @@ import me.errorpnf.bedwarsmod.data.BedwarsExperience;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
 import me.errorpnf.bedwarsmod.data.PrestigeList;
 import me.errorpnf.bedwarsmod.utils.StatUtils;
+import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import me.errorpnf.bedwarsmod.utils.formatting.RankUtils;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -124,21 +123,21 @@ public class Stats {
 
         this.gamesPlayed = wins + losses;
 
-        this.wlr = roundToTwoDecimalPlaces(wins, losses);
-        this.winsPerStar = roundToTwoDecimalPlaces(wins, level);
-        this.lossesPerStar = roundToTwoDecimalPlaces(losses, level);
+        this.wlr = FormatUtils.roundToTwoDecimalPlacesForStats(wins, losses);
+        this.winsPerStar = FormatUtils.roundToTwoDecimalPlacesForStats(wins, level);
+        this.lossesPerStar = FormatUtils.roundToTwoDecimalPlacesForStats(losses, level);
 
-        this.fkdr = roundToTwoDecimalPlaces(finalKills, finalDeaths);
-        this.finalsPerGame = roundToTwoDecimalPlaces(finalKills, gamesPlayed);
-        this.finalsPerStar = roundToTwoDecimalPlaces(finalKills, level);
+        this.fkdr = FormatUtils.roundToTwoDecimalPlacesForStats(finalKills, finalDeaths);
+        this.finalsPerGame = FormatUtils.roundToTwoDecimalPlacesForStats(finalKills, gamesPlayed);
+        this.finalsPerStar = FormatUtils.roundToTwoDecimalPlacesForStats(finalKills, level);
 
-        this.kdr = roundToTwoDecimalPlaces(kills, deaths);
-        this.killsPerGame = roundToTwoDecimalPlaces(kills, gamesPlayed);
-        this.killsPerStar = roundToTwoDecimalPlaces(kills, level);
+        this.kdr = FormatUtils.roundToTwoDecimalPlacesForStats(kills, deaths);
+        this.killsPerGame = FormatUtils.roundToTwoDecimalPlacesForStats(kills, gamesPlayed);
+        this.killsPerStar = FormatUtils.roundToTwoDecimalPlacesForStats(kills, level);
 
-        this.bblr = roundToTwoDecimalPlaces(beds, bedsLost);
-        this.bedsPerGame = roundToTwoDecimalPlaces(beds, gamesPlayed);
-        this.bedsPerStar = roundToTwoDecimalPlaces(beds, level);
+        this.bblr = FormatUtils.roundToTwoDecimalPlacesForStats(beds, bedsLost);
+        this.bedsPerGame = FormatUtils.roundToTwoDecimalPlacesForStats(beds, gamesPlayed);
+        this.bedsPerStar = FormatUtils.roundToTwoDecimalPlacesForStats(beds, level);
 
         this.formattedRank = RankUtils.formatRankAndUsername(displayUsername, apiReq);
         this.formattedStar = prestigeList.getPrestige(level);
@@ -149,10 +148,11 @@ public class Stats {
         this.expReqToLevelUp = BedwarsExperience.getExperienceRequiredForCurrentLevel(exp);
 
         this.tokens = getStat("coins");
-        this.slumberTickets = getStat("slumber.tickets");
+        this.slumberTickets = getStat("slumber.total_tickets_earned");
 
-        this.clutchRatePercent = formatDecimal(100d - (double) losses / (double) bedsLost * 100d);
-        this.winRatePercent = formatDecimal((100d / gamesPlayed) * wins);
+        double rawPercentage = (double) (wins - (gamesPlayed - bedsLost)) / bedsLost * 100d;
+        this.clutchRatePercent = Math.max(0, FormatUtils.formatDecimal(rawPercentage));
+        this.winRatePercent = FormatUtils.formatDecimal((100d / gamesPlayed) * wins);
 
         this.skillIndex = calculateSkillIndex(fkdr, level);
     }
@@ -171,31 +171,6 @@ public class Stats {
         this.beds += getStat(prefix1 + "beds_broken_bedwars") + getStat(prefix2 + "beds_broken_bedwars");
         this.bedsLost += getStat(prefix1 + "beds_lost_bedwars") + getStat(prefix2 + "beds_lost_bedwars");
     }
-
-    private static double roundToTwoDecimalPlaces(int numerator, int denominator) {
-        if (numerator != 0 && denominator != 0) {
-            double result = (double) numerator / denominator;
-            return Math.round(result * 100.0) / 100.0;
-        } else if (numerator != 0) {
-            return numerator;
-        } else if (denominator != 0) {
-            return 0.0;
-        } else {
-            return 0.0;
-        }
-    }
-
-    private static double formatDecimal(double value) {
-        if (Double.isNaN(value) || Double.isInfinite(value)) {
-            return 0.0; // Handle NaN and Infinite values
-        }
-        if (value == 0) {
-            return 0.0;
-        }
-        BigDecimal bd = new BigDecimal(value).setScale(1, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-
 
     public static int calculateSkillIndex(double fkdr, double stars) {
         // calculate skill score using the formula (fkdr^2) * stars

@@ -46,11 +46,11 @@ public class FinalKillHearts {
                     .map(score -> score.getPlayerName() + getSuffixFromContainingTeam(scoreboard, score.getPlayerName()))
                     .collect(Collectors.toList());
 
-            for (int i = 0; i < found.size(); i++) {
+            for (String s : found) {
                 Pattern pattern = Pattern.compile("§a[0-9]§7 YOU");
-                Matcher matcher = pattern.matcher(found.get(i));
+                Matcher matcher = pattern.matcher(s);
 
-                if (found.get(i).endsWith("§a§l✓§7 YOU")) {
+                if (s.endsWith("§a§l✓§7 YOU")) {
                     isFinalKill = false;
                     return;
                 } else if (matcher.find()) {

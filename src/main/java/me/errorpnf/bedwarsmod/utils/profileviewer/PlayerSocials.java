@@ -4,6 +4,7 @@ import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
 import me.errorpnf.bedwarsmod.utils.RenderUtils;
 import me.errorpnf.bedwarsmod.utils.StatUtils;
+import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
@@ -28,16 +29,16 @@ public class PlayerSocials extends GuiScreen {
     private static String username;
     private static FontRenderer fontRenderer;
 
-    private static String[] clickMessage = new String[Social.values().length];
-    private static String[] urls = new String[7];
-    private static boolean[] conditions = new boolean[Social.values().length];
+    private static final String[] clickMessage = new String[Social.values().length];
+    private static final String[] urls = new String[7];
+    private static final boolean[] conditions = new boolean[Social.values().length];
     private static final List<ResourceLocation> textures = new ArrayList<>();
     private static final List<ResourceLocation> texturesPressed = new ArrayList<>();
 
     private static final float TEXTURE_SIZE = 15F;
     private static final float SEPARATION = 0F;
 
-    private static boolean[] mouseButtonDown = new boolean[7];
+    private static final boolean[] mouseButtonDown = new boolean[7];
 
     public PlayerSocials(JsonObject jsonObject, String username, FontRenderer fontRenderer) {
         PlayerSocials.jsonObject = jsonObject;
@@ -71,13 +72,12 @@ public class PlayerSocials extends GuiScreen {
         }
 
         if (numTexturesToDraw == 0) {
-            RenderUtils.drawStringCentered(fontRenderer, RenderUtils.formatText("&cNo Socials"), centerX, centerY + 0.5f, true, 0);
+            RenderUtils.drawStringCentered(fontRenderer, FormatUtils.format("&cNo Socials"), centerX, centerY + 0.5f, true, 0);
         }
 
         float totalWidth = (TEXTURE_SIZE * numTexturesToDraw) + (SEPARATION * (numTexturesToDraw - 1));
-        float startX = centerX - (totalWidth / 2.0F);
 
-        float x = startX;
+        float x = centerX - (totalWidth / 2.0F);
         for (int i = 0; i < conditions.length; i++) {
             if (conditions[i]) {
                 float y = centerY - (TEXTURE_SIZE / 2.0F);

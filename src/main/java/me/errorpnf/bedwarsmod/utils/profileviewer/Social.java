@@ -9,9 +9,9 @@ public enum Social {
     YOUTUBE("YOUTUBE", "YouTube", 5),
     INSTAGRAM("INSTAGRAM", "Instagram", 6);
 
-    private String name;
-    private String prettyName;
-    private int key;
+    private final String name;
+    private final String prettyName;
+    private final int key;
 
     Social(String name, String prettyName, int key) {
         this.name = name;

@@ -15,22 +15,6 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApiUtils {
 
-//    private static String getApiKey() {
-//        String apiKey = System.getenv("HYPIXEL_API_KEY");
-//        if (apiKey != null) {
-//            return apiKey;
-//        }
-//
-//        return System.getProperty("apiKey", "9a8e6eeb-9f0a-4b8d-b28a-6e05c55fe54c"); // arbitrary key, replace with your own to test or use the property
-//    }
-//
-//    public static final HypixelAPI API;
-//
-//    static {
-//        API = new HypixelAPI(new ApacheHttpClient(UUID.fromString(getApiKey())));
-//    }
-
-
 
     public static JsonObject lastApiResponse = null;
 
@@ -81,7 +65,7 @@ public class ApiUtils {
 
 
 
-    private static final String API_BASE_URL = "https://hypixel-bedwars-mod-api-backend.mggpr7qd55.workers.dev/";
+    private static final String API_BASE_URL = "https://hypixel-bedwars-api-mod-backend.mggpr7qd55.workers.dev/";
 
     public static CompletableFuture<JsonObject> hypixelApiRequest(String username) {
         OkHttpClient client = new OkHttpClient();
@@ -108,7 +92,7 @@ public class ApiUtils {
                 }
 
                 String responseBody = response.body().string();
-                System.out.println("API Response: " + responseBody); // Debug output
+                //System.out.println("API Response: " + responseBody); // Debug output
 
                 try {
                     JsonParser parser = new JsonParser();

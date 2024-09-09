@@ -6,41 +6,54 @@ import me.errorpnf.bedwarsmod.utils.StatUtils;
 public class RankUtils {
 
     public static String formatRankAndUsername(String username, JsonObject apiReq) {
-        StatUtils s = new StatUtils(apiReq);
+        StatUtils stats = new StatUtils(apiReq);
 
-        String packageRank = s.getStat("player.newPackageRank");
+        String packageRank = stats.getStat("player.newPackageRank");
 
-        if (packageRank.equals("VIP")) {
-            return "&a[VIP] " + username;
-        } else if (packageRank.equals("VIP_PLUS")) {
-            return "&a[VIP&6+&a] " + username;
-        } else if (packageRank.equals("MVP")) {
-            return "&b[MVP] " + username;
-        } else if (packageRank.equals("MVP_PLUS")) {
-            String monthlyPackageRank = s.getStat("player.monthlyPackageRank");
-            String plusColor = getColorCode(s.getStat("player.rankPlusColor"));
-            String rankColor = getColorCode(s.getStat("player.monthlyRankColor"));
+        String prefix = stats.getStat("player.prefix");
+        if (!prefix.equals("0")) {
+            return prefix + " " + username;
+        }
 
-            if (plusColor.isEmpty()) {
-                plusColor = "&c";
-            }
+        String specialRank = stats.getStat("player.rank");
+        if (specialRank.equalsIgnoreCase("ADMIN")) {
+            return "§c[ADMIN] " + username;
+        } else if (specialRank.equalsIgnoreCase("GAME_MASTER")) {
+            return "§2[GM] " + username;
+        } if (specialRank.equalsIgnoreCase("YOUTUBER")) {
+            return "§c[§fYOUTUBE§c] " + username;
+        }
 
-            if (rankColor.isEmpty()) {
-                rankColor = "&6";
-            }
+        switch (packageRank) {
+            case "VIP":
+                return "&a[VIP] " + username;
+            case "VIP_PLUS":
+                return "&a[VIP&6+&a] " + username;
+            case "MVP":
+                return "&b[MVP] " + username;
+            case "MVP_PLUS":
+                String monthlyPackageRank = stats.getStat("player.monthlyPackageRank");
+                String plusColor = getColorCode(stats.getStat("player.rankPlusColor"));
+                String rankColor = getColorCode(stats.getStat("player.monthlyRankColor"));
 
-            if (monthlyPackageRank.equals("SUPERSTAR")) {
-                if (rankColor.equals("&6")) {
+                if (plusColor.isEmpty()) {
+                    plusColor = "&c";
+                }
+
+                if (rankColor.isEmpty()) {
+                    rankColor = "&6";
+                }
+
+                if (monthlyPackageRank.equals("SUPERSTAR")) {
+                    if (!rankColor.equals("&6")) {
+                        rankColor = "&b";
+                    }
                     return rankColor + "[MVP" + plusColor + "++" + rankColor + "] " + username;
                 } else {
-                    rankColor = "&b";
-                    return rankColor + "[MVP" + plusColor + "++" + rankColor + "] " + username;
+                    return "&b[MVP" + plusColor + "+" + "&b] " + username;
                 }
-            } else {
-                return "&b[MVP" + plusColor + "+" + "&b] " + username;
-            }
-        } else {
-            return "&7" + username;
+            default:
+                return "&7" + username;
         }
     }
 

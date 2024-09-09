@@ -46,6 +46,7 @@ public class BedwarsMod {
             openGui = null;
             return;
         }
+
         if (openGui != null) {
             if (Minecraft.getMinecraft().thePlayer.openContainer != null) {
                 Minecraft.getMinecraft().thePlayer.closeScreen();

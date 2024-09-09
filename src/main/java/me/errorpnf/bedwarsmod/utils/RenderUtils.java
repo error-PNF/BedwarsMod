@@ -1,36 +1,27 @@
 package me.errorpnf.bedwarsmod.utils;
 
-import com.google.gson.JsonObject;
-import com.mojang.authlib.GameProfile;
+import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.Shader;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.util.Matrix4f;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
-
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RenderUtils extends GuiScreen {
     private final int sizeX = 430;
     private final int sizeY = 224;
 
     public EntityOtherPlayerMP entityPlayer = null;
-    private ResourceLocation playerLocationSkin = null;
-    private ResourceLocation playerLocationCape = null;
-    private String skinType = null;
+    private final ResourceLocation playerLocationSkin = null;
+    private final ResourceLocation playerLocationCape = null;
+    private final String skinType = null;
 
     public static void renderBlurredBackground(int width, int height, int x, int y, int blurWidth, int blurHeight) {
         if (!OpenGlHelper.isFramebufferEnabled()) return;
@@ -201,7 +192,7 @@ public class RenderUtils extends GuiScreen {
     }
 
     public static void drawStringCentered(FontRenderer fr, String str, float x, float y, boolean shadow, int colour) {
-        int strLen = fr.getStringWidth(unformatText(str));
+        int strLen = fr.getStringWidth(FormatUtils.unformat(str));
 
         float x2 = x - strLen / 2f;
         float y2 = y - fr.FONT_HEIGHT / 2f;
@@ -230,6 +221,30 @@ public class RenderUtils extends GuiScreen {
         drawStringScaled(fr, str, x - newLen / 2, y - fontHeight / 2, shadow, colour, factor);
     }
 
+    public static void drawStringCenteredScaled(
+            FontRenderer fr,
+            String str,
+            float x,
+            float y,
+            boolean shadow,
+            int colour,
+            float scaleFactor
+    ) {
+
+        int strWidth = (int) (fr.getStringWidth(FormatUtils.unformat(str)) * scaleFactor);
+        int strHeight = (int) (fr.FONT_HEIGHT * scaleFactor);
+
+        float centerX = x - strWidth / 2f;
+        float centerY = y - strHeight / 2f;
+
+        GL11.glPushMatrix();
+        GL11.glTranslatef(centerX, centerY, 0);
+        GlStateManager.scale(scaleFactor, scaleFactor, 1);
+        fr.drawString(str, 0, 0, colour, shadow);
+        GlStateManager.scale(1 / scaleFactor, 1 / scaleFactor, 1);
+        GL11.glPopMatrix();
+    }
+
     public static void drawStringScaled(
             FontRenderer fr,
             String str,
@@ -245,22 +260,13 @@ public class RenderUtils extends GuiScreen {
         float x2 = x - strLen / 2f;
         float y2 = y - fr.FONT_HEIGHT / 2f;
 
+        GL11.glPushMatrix();
         GL11.glTranslatef(x2, y2, 0);
         GlStateManager.scale(scale, scale, 1);
         fr.drawString(str, x / scale, y / scale, colour, shadow);
         GlStateManager.scale(1 / scale, 1 / scale, 1);
         GL11.glTranslatef(-x2, -y2, 0);
-    }
-
-    public static String formatText(String text) {
-        // Replace color codes with Minecraft's color format
-        return text.replace("&", "\u00A7");
-    }
-
-    private static String unformatText(String formattedString) {
-        Pattern FORMAT_CODE_PATTERN = Pattern.compile("§[0-9a-fk-or]");
-        Matcher matcher = FORMAT_CODE_PATTERN.matcher(formattedString);
-        return matcher.replaceAll(""); // Remove all occurrences of formatting codes
+        GL11.glPopMatrix();
     }
 
     public static void drawRect(float left, float top, float right, float bottom, int color) {
@@ -288,12 +294,84 @@ public class RenderUtils extends GuiScreen {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(g, h, j, f);
         worldRenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldRenderer.pos((double)left, (double)bottom, 0.0).endVertex();
-        worldRenderer.pos((double)right, (double)bottom, 0.0).endVertex();
-        worldRenderer.pos((double)right, (double)top, 0.0).endVertex();
-        worldRenderer.pos((double)left, (double)top, 0.0).endVertex();
+        worldRenderer.pos(left, bottom, 0.0).endVertex();
+        worldRenderer.pos(right, bottom, 0.0).endVertex();
+        worldRenderer.pos(right, top, 0.0).endVertex();
+        worldRenderer.pos(left, top, 0.0).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+    }
+
+    public static void drawString(FontRenderer fontRenderer, String text, float x, float y, int color, boolean shadow) {
+        // Get the width and height of the text
+        int textWidth = fontRenderer.getStringWidth(text);
+        int textHeight = fontRenderer.FONT_HEIGHT;
+
+        // Calculate the translation to handle floating-point coordinates
+
+        // Apply translation
+        GL11.glTranslatef(x, y, 0);
+
+        // Draw the string with the specified parameters
+        fontRenderer.drawString(text, 0, 0, color, shadow);
+
+        // Revert the translation
+        GL11.glTranslatef(-x, -y, 0);
+    }
+
+    public static void drawStringLeftAligned(FontRenderer fontRenderer, String text, float x, float y, int color, boolean shadow) {
+        // Get the width and height of the text
+        int textWidth = fontRenderer.getStringWidth(text);
+        int textHeight = fontRenderer.FONT_HEIGHT;
+
+        float y2 = y - fontRenderer.FONT_HEIGHT / 2f;
+
+        // Apply translation
+        GL11.glTranslatef(x, y2, 0);
+
+        // Draw the string with the specified parameters
+        fontRenderer.drawString(text, 0, 0, color, shadow);
+
+        // Revert the translation
+        GL11.glTranslatef(-x, -y2, 0);
+    }
+
+    public static void drawStringWithNewlinesScaled(
+            FontRenderer fr,
+            String str,
+            float x,
+            float y,
+            boolean shadow,
+            int colour,
+            float lineSpacing,
+            float emptyLineHeight,
+            float scaleFactor
+    ) {
+
+        String[] lines = str.split("\n");
+
+        // calculate the height of each line with scaling
+        int lineHeight = (int) (fr.FONT_HEIGHT * scaleFactor);
+
+        float currentY = y;
+
+        for (String line : lines) {
+            if (line.trim().isEmpty()) {
+                // for empty lines, use the specified empty line height
+                currentY += emptyLineHeight;
+            } else {
+
+                // draw non-empty lines
+                GL11.glPushMatrix();
+                GL11.glTranslatef(x, currentY, 0);
+                GlStateManager.scale(scaleFactor, scaleFactor, 1);
+                fr.drawString(line, 0, 0, colour, shadow);
+                GlStateManager.scale(1 / scaleFactor, 1 / scaleFactor, 1);
+                GL11.glPopMatrix();
+
+                currentY += lineHeight + lineSpacing;
+            }
+        }
     }
 }

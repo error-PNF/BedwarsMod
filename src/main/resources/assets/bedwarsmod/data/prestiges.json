@@ -2,9 +2,9 @@
   "prestiges": {
     "0": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§7",
+        "leftBracket": "\u00a77",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -17,9 +17,9 @@
     },
     "1": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§f",
+        "leftBracket": "\u00a7f",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -32,9 +32,9 @@
     },
     "2": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§6",
+        "leftBracket": "\u00a76",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -47,9 +47,9 @@
     },
     "3": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§b",
+        "leftBracket": "\u00a7b",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -62,9 +62,9 @@
     },
     "4": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§2",
+        "leftBracket": "\u00a72",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -77,9 +77,9 @@
     },
     "5": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§3",
+        "leftBracket": "\u00a73",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -92,9 +92,9 @@
     },
     "6": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§4",
+        "leftBracket": "\u00a74",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -107,9 +107,9 @@
     },
     "7": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§d",
+        "leftBracket": "\u00a7d",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -122,9 +122,9 @@
     },
     "8": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§9",
+        "leftBracket": "\u00a79",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -137,9 +137,9 @@
     },
     "9": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§5",
+        "leftBracket": "\u00a75",
         "rightBracket": "",
         "starColor": "",
         "numberColors": [
@@ -152,28 +152,28 @@
     },
     "10": {
       "prestigeName": "",
-      "starSymbol": "✫",
+      "starSymbol": "\u272b",
       "colors": {
-        "leftBracket": "§c",
-        "rightBracket": "§5",
-        "starColor": "§d",
+        "leftBracket": "\u00a7c",
+        "rightBracket": "\u00a75",
+        "starColor": "\u00a7d",
         "numberColors": [
-          "§6",
-          "§e",
-          "§a",
-          "§b"
+          "\u00a76",
+          "\u00a7e",
+          "\u00a7a",
+          "\u00a7b"
         ]
       }
     },
     "11": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
+        "leftBracket": "\u00a77",
         "rightBracket": "",
-        "starColor": "§7",
+        "starColor": "\u00a77",
         "numberColors": [
-          "§f",
+          "\u00a7f",
           "",
           "",
           ""
@@ -182,13 +182,13 @@
     },
     "12": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§6",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a76",
         "numberColors": [
-          "§e",
+          "\u00a7e",
           "",
           "",
           ""
@@ -197,13 +197,13 @@
     },
     "13": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§3",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a73",
         "numberColors": [
-          "§b",
+          "\u00a7b",
           "",
           "",
           ""
@@ -212,13 +212,13 @@
     },
     "14": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§2",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a72",
         "numberColors": [
-          "§a",
+          "\u00a7a",
           "",
           "",
           ""
@@ -227,13 +227,13 @@
     },
     "15": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§9",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a79",
         "numberColors": [
-          "§3",
+          "\u00a73",
           "",
           "",
           ""
@@ -242,13 +242,13 @@
     },
     "16": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§4",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a74",
         "numberColors": [
-          "§c",
+          "\u00a7c",
           "",
           "",
           ""
@@ -257,13 +257,13 @@
     },
     "17": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§5",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a75",
         "numberColors": [
-          "§d",
+          "\u00a7d",
           "",
           "",
           ""
@@ -272,13 +272,13 @@
     },
     "18": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§1",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a71",
         "numberColors": [
-          "§9",
+          "\u00a79",
           "",
           "",
           ""
@@ -287,13 +287,13 @@
     },
     "19": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§7",
-        "rightBracket": "§7",
-        "starColor": "§8",
+        "leftBracket": "\u00a77",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a78",
         "numberColors": [
-          "§5",
+          "\u00a75",
           "",
           "",
           ""
@@ -302,465 +302,465 @@
     },
     "20": {
       "prestigeName": "",
-      "starSymbol": "✪",
+      "starSymbol": "\u272a",
       "colors": {
-        "leftBracket": "§8",
-        "rightBracket": "§8",
+        "leftBracket": "\u00a78",
+        "rightBracket": "\u00a78",
         "starColor": "",
         "numberColors": [
-          "§7",
-          "§f",
+          "\u00a77",
+          "\u00a7f",
           "",
-          "§7"
+          "\u00a77"
         ]
       }
     },
     "21": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§f",
-        "rightBracket": "§6",
-        "starColor": "§l",
+        "leftBracket": "\u00a7f",
+        "rightBracket": "\u00a76",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§e",
+          "\u00a7e",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "22": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§6",
-        "rightBracket": "§3",
-        "starColor": "§3§l",
+        "leftBracket": "\u00a76",
+        "rightBracket": "\u00a73",
+        "starColor": "\u00a73\u00a7l",
         "numberColors": [
           "",
-          "§f",
+          "\u00a7f",
           "",
-          "§b"
+          "\u00a7b"
         ]
       }
     },
     "23": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§5",
-        "rightBracket": "§e",
-        "starColor": "§e§l",
+        "leftBracket": "\u00a75",
+        "rightBracket": "\u00a7e",
+        "starColor": "\u00a7e\u00a7l",
         "numberColors": [
           "",
-          "§d",
+          "\u00a7d",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "24": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§b",
-        "rightBracket": "§8",
-        "starColor": "§l",
+        "leftBracket": "\u00a7b",
+        "rightBracket": "\u00a78",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§f",
+          "\u00a7f",
           "",
-          "§7"
+          "\u00a77"
         ]
       }
     },
     "25": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§f",
-        "rightBracket": "§2",
-        "starColor": "§l",
+        "leftBracket": "\u00a7f",
+        "rightBracket": "\u00a72",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§a",
+          "\u00a7a",
           "",
-          "§2"
+          "\u00a72"
         ]
       }
     },
     "26": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§4",
-        "rightBracket": "§d",
-        "starColor": "§l",
+        "leftBracket": "\u00a74",
+        "rightBracket": "\u00a7d",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§c",
+          "\u00a7c",
           "",
-          "§d"
+          "\u00a7d"
         ]
       }
     },
     "27": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§e",
-        "rightBracket": "§8",
-        "starColor": "§l",
+        "leftBracket": "\u00a7e",
+        "rightBracket": "\u00a78",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§f",
+          "\u00a7f",
           "",
-          "§8"
+          "\u00a78"
         ]
       }
     },
     "28": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§a",
-        "rightBracket": "§e",
-        "starColor": "§l",
+        "leftBracket": "\u00a7a",
+        "rightBracket": "\u00a7e",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§2",
+          "\u00a72",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "29": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§b",
-        "rightBracket": "§1",
-        "starColor": "§l",
+        "leftBracket": "\u00a7b",
+        "rightBracket": "\u00a71",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§3",
+          "\u00a73",
           "",
-          "§9"
+          "\u00a79"
         ]
       }
     },
     "30": {
       "prestigeName": "",
-      "starSymbol": "⚝",
+      "starSymbol": "\u269d",
       "colors": {
-        "leftBracket": "§e",
-        "rightBracket": "§4",
-        "starColor": "§l",
+        "leftBracket": "\u00a7e",
+        "rightBracket": "\u00a74",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§6",
+          "\u00a76",
           "",
-          "§c"
+          "\u00a7c"
         ]
       }
     },
     "31": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§9",
-        "rightBracket": "§e",
-        "starColor": "§l",
+        "leftBracket": "\u00a79",
+        "rightBracket": "\u00a7e",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§2",
+          "\u00a72",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "32": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§c",
-        "rightBracket": "§c",
-        "starColor": "§c§l",
+        "leftBracket": "\u00a7c",
+        "rightBracket": "\u00a7c",
+        "starColor": "\u00a7c\u00a7l",
         "numberColors": [
-          "§4",
-          "§7",
+          "\u00a74",
+          "\u00a77",
           "",
-          "§4"
+          "\u00a74"
         ]
       }
     },
     "33": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§9",
-        "rightBracket": "§4",
-        "starColor": "§l",
+        "leftBracket": "\u00a79",
+        "rightBracket": "\u00a74",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
           "",
-          "§d",
-          "§c"
+          "\u00a7d",
+          "\u00a7c"
         ]
       }
     },
     "34": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§2",
-        "rightBracket": "§2",
-        "starColor": "§l",
+        "leftBracket": "\u00a72",
+        "rightBracket": "\u00a72",
+        "starColor": "\u00a7l",
         "numberColors": [
-          "§a",
-          "§d",
+          "\u00a7a",
+          "\u00a7d",
           "",
-          "§5"
+          "\u00a75"
         ]
       }
     },
     "35": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§c",
-        "rightBracket": "§a",
-        "starColor": "§a§l",
+        "leftBracket": "\u00a7c",
+        "rightBracket": "\u00a7a",
+        "starColor": "\u00a7a\u00a7l",
         "numberColors": [
           "",
-          "§4",
+          "\u00a74",
           "",
-          "§2"
+          "\u00a72"
         ]
       }
     },
     "36": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§a",
-        "rightBracket": "§1",
-        "starColor": "§l",
+        "leftBracket": "\u00a7a",
+        "rightBracket": "\u00a71",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
           "",
-          "§b",
-          "§9"
+          "\u00a7b",
+          "\u00a79"
         ]
       }
     },
     "37": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§4",
-        "rightBracket": "§3",
-        "starColor": "§3§l",
+        "leftBracket": "\u00a74",
+        "rightBracket": "\u00a73",
+        "starColor": "\u00a73\u00a7l",
         "numberColors": [
           "",
-          "§c",
+          "\u00a7c",
           "",
-          "§b"
+          "\u00a7b"
         ]
       }
     },
     "38": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§1",
-        "rightBracket": "§1",
-        "starColor": "§d§l",
+        "leftBracket": "\u00a71",
+        "rightBracket": "\u00a71",
+        "starColor": "\u00a7d\u00a7l",
         "numberColors": [
           "",
-          "§9",
-          "§5",
+          "\u00a79",
+          "\u00a75",
           ""
         ]
       }
     },
     "39": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§c",
-        "rightBracket": "§9",
-        "starColor": "§9§l",
+        "leftBracket": "\u00a7c",
+        "rightBracket": "\u00a79",
+        "starColor": "\u00a79\u00a7l",
         "numberColors": [
           "",
-          "§a",
+          "\u00a7a",
           "",
-          "§3"
+          "\u00a73"
         ]
       }
     },
     "40": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§5",
-        "rightBracket": "§e",
-        "starColor": "§l",
+        "leftBracket": "\u00a75",
+        "rightBracket": "\u00a7e",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§c",
+          "\u00a7c",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "41": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§e",
-        "rightBracket": "§5",
-        "starColor": "§l",
+        "leftBracket": "\u00a7e",
+        "rightBracket": "\u00a75",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§6",
-          "§c",
-          "§d"
+          "\u00a76",
+          "\u00a7c",
+          "\u00a7d"
         ]
       }
     },
     "42": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§1",
-        "rightBracket": "§7",
-        "starColor": "§7§l",
+        "leftBracket": "\u00a71",
+        "rightBracket": "\u00a77",
+        "starColor": "\u00a77\u00a7l",
         "numberColors": [
-          "§9",
-          "§3",
-          "§b",
-          "§f"
+          "\u00a79",
+          "\u00a73",
+          "\u00a7b",
+          "\u00a7f"
         ]
       }
     },
     "43": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§0",
-        "rightBracket": "§0",
-        "starColor": "§l",
+        "leftBracket": "\u00a70",
+        "rightBracket": "\u00a70",
+        "starColor": "\u00a7l",
         "numberColors": [
-          "§5",
-          "§8",
+          "\u00a75",
+          "\u00a78",
           "",
-          "§5"
+          "\u00a75"
         ]
       }
     },
     "44": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§2",
-        "rightBracket": "§d",
-        "starColor": "§5§l",
+        "leftBracket": "\u00a72",
+        "rightBracket": "\u00a7d",
+        "starColor": "\u00a75\u00a7l",
         "numberColors": [
           "",
-          "§a",
-          "§e",
-          "§6"
+          "\u00a7a",
+          "\u00a7e",
+          "\u00a76"
         ]
       }
     },
     "45": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§f",
-        "rightBracket": "§2",
-        "starColor": "§l",
+        "leftBracket": "\u00a7f",
+        "rightBracket": "\u00a72",
+        "starColor": "\u00a7l",
         "numberColors": [
           "",
-          "§b",
+          "\u00a7b",
           "",
-          "§2"
+          "\u00a72"
         ]
       }
     },
     "46": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§2",
-        "rightBracket": "§5",
-        "starColor": "§d§l",
+        "leftBracket": "\u00a72",
+        "rightBracket": "\u00a75",
+        "starColor": "\u00a7d\u00a7l",
         "numberColors": [
-          "§b",
-          "§e",
+          "\u00a7b",
+          "\u00a7e",
           "",
-          "§6"
+          "\u00a76"
         ]
       }
     },
     "47": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§f",
-        "rightBracket": "§9",
-        "starColor": "§1§l",
+        "leftBracket": "\u00a7f",
+        "rightBracket": "\u00a79",
+        "starColor": "\u00a71\u00a7l",
         "numberColors": [
-          "§4",
-          "§c",
+          "\u00a74",
+          "\u00a7c",
           "",
-          "§9"
+          "\u00a79"
         ]
       }
     },
     "48": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§5",
-        "rightBracket": "§3",
-        "starColor": "§b§l",
+        "leftBracket": "\u00a75",
+        "rightBracket": "\u00a73",
+        "starColor": "\u00a7b\u00a7l",
         "numberColors": [
           "",
-          "§c",
-          "§6",
-          "§e"
+          "\u00a7c",
+          "\u00a76",
+          "\u00a7e"
         ]
       }
     },
     "49": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§2",
-        "rightBracket": "§2",
-        "starColor": "§l",
+        "leftBracket": "\u00a72",
+        "rightBracket": "\u00a72",
+        "starColor": "\u00a7l",
         "numberColors": [
-          "§a",
-          "§f",
+          "\u00a7a",
+          "\u00a7f",
           "",
-          "§a"
+          "\u00a7a"
         ]
       }
     },
     "50": {
       "prestigeName": "",
-      "starSymbol": "✥",
+      "starSymbol": "\u2725",
       "colors": {
-        "leftBracket": "§4",
-        "rightBracket": "§0",
-        "starColor": "§1§l",
+        "leftBracket": "\u00a74",
+        "rightBracket": "\u00a70",
+        "starColor": "\u00a71\u00a7l",
         "numberColors": [
           "",
-          "§5",
-          "§9",
+          "\u00a75",
+          "\u00a79",
           ""
         ]
       }

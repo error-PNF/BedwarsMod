@@ -5,6 +5,7 @@
   "refmap": "mixins.bedwarsmod.refmap.json",
   "verbose": true,
   "client": [
-    "me.errorpnf.bedwarsmod.mixin.GuiIngameForgeMixin"
+    "GuiIngameForgeMixin",
+    "GuiNametagMixin"
   ]
 }
