@@ -1,11 +1,13 @@
 package me.errorpnf.bedwarsmod;
 
+import cc.polyfrost.oneconfig.events.EventManager;
 import me.errorpnf.bedwarsmod.commands.BedwarsChatStats;
 import me.errorpnf.bedwarsmod.commands.MyCommand;
 import me.errorpnf.bedwarsmod.commands.PVCommand;
 import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
 import me.errorpnf.bedwarsmod.utils.ClickChatForStats;
-import me.errorpnf.bedwarsmod.utils.FinalKillHearts;
+import me.errorpnf.bedwarsmod.features.FinalKillHearts;
+import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -37,6 +39,7 @@ public class BedwarsMod {
         ClientCommandHandler.instance.registerCommand(new BedwarsChatStats());
         ClientCommandHandler.instance.registerCommand(new PVCommand());
         MinecraftForge.EVENT_BUS.register(this);
+        EventManager.INSTANCE.register(new HypixelLocraw());
     }
 
     @SubscribeEvent

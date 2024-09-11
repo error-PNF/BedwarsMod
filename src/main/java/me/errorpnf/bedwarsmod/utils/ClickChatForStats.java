@@ -20,6 +20,11 @@ public class ClickChatForStats {
 
     @SubscribeEvent
     public void onChatReceivedEvent(ClientChatReceivedEvent event) {
+        if (HypixelLocraw.rawGameType.isEmpty() || !HypixelLocraw.rawGameType.contains("BEDWARS") || !HypixelLocraw.gamemode.contains("lobby")) {
+            return;
+        }
+
+
         if (event.message.getSiblings().isEmpty()) {
             return; // Avoid accessing an empty list
         }

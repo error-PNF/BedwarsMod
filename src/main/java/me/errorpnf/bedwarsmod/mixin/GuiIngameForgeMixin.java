@@ -1,6 +1,6 @@
 package me.errorpnf.bedwarsmod.mixin;
 
-import me.errorpnf.bedwarsmod.utils.FinalKillHearts;
+import me.errorpnf.bedwarsmod.features.FinalKillHearts;
 import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.GuiIngameForge;

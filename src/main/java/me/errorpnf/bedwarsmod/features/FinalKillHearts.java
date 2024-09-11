@@ -1,4 +1,4 @@
-package me.errorpnf.bedwarsmod.utils;
+package me.errorpnf.bedwarsmod.features;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.Score;
