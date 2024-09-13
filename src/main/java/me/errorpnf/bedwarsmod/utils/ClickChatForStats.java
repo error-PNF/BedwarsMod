@@ -1,5 +1,6 @@
 package me.errorpnf.bedwarsmod.utils;
 
+import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
@@ -20,6 +21,7 @@ public class ClickChatForStats {
 
     @SubscribeEvent
     public void onChatReceivedEvent(ClientChatReceivedEvent event) {
+        if (!HypixelUtils.INSTANCE.isHypixel()) return;
         if (HypixelLocraw.rawGameType.isEmpty() || !HypixelLocraw.rawGameType.contains("BEDWARS") || !HypixelLocraw.gamemode.contains("lobby")) {
             return;
         }

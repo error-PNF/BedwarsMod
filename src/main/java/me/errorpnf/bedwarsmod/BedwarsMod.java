@@ -1,12 +1,14 @@
 package me.errorpnf.bedwarsmod;
 
 import cc.polyfrost.oneconfig.events.EventManager;
+import me.errorpnf.bedwarsmod.autoupdate.GithubAutoupdater;
 import me.errorpnf.bedwarsmod.commands.BedwarsChatStats;
+import me.errorpnf.bedwarsmod.commands.BedwarsModCommand;
 import me.errorpnf.bedwarsmod.commands.MyCommand;
 import me.errorpnf.bedwarsmod.commands.PVCommand;
 import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
-import me.errorpnf.bedwarsmod.utils.ClickChatForStats;
 import me.errorpnf.bedwarsmod.features.FinalKillHearts;
+import me.errorpnf.bedwarsmod.utils.ClickChatForStats;
 import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -33,13 +35,22 @@ public class BedwarsMod {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         config = new BedwarsModConfig();
-        MinecraftForge.EVENT_BUS.register(new FinalKillHearts());
+
+        ClientCommandHandler.instance.registerCommand(new BedwarsModCommand());
         ClientCommandHandler.instance.registerCommand(new MyCommand());
-        MinecraftForge.EVENT_BUS.register(new ClickChatForStats());
         ClientCommandHandler.instance.registerCommand(new BedwarsChatStats());
         ClientCommandHandler.instance.registerCommand(new PVCommand());
+
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new FinalKillHearts());
+        MinecraftForge.EVENT_BUS.register(new ClickChatForStats());
         EventManager.INSTANCE.register(new HypixelLocraw());
+
+
+        EventManager.INSTANCE.register(new GithubAutoupdater());
+
+        GithubAutoupdater.init();
+//        UpdateManager.init();
     }
 
     @SubscribeEvent
