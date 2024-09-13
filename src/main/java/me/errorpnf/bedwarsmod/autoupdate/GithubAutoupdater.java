@@ -133,6 +133,7 @@ public class GithubAutoupdater {
                         isOutdated = true;
                         System.out.println("An update is available. Current version: " + currentVersion);
                         hasPromptedUpdate = false;
+                        addShutdownHook();
                     }
                     future.complete(json);
                 } catch (Exception e) {
@@ -160,7 +161,6 @@ public class GithubAutoupdater {
     }
 
     public static void downloadAndReplaceMod() {
-        addShutdownHook();
         try {
             File modsFolder = new File(Minecraft.getMinecraft().mcDataDir, "mods");
             File currentMod = new File(modsFolder, "Bedwars_Mod-1.8.9-forge-" + BedwarsMod.VERSION + ".jar");
