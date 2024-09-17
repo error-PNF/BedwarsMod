@@ -26,8 +26,13 @@ public class BedwarsModCommand extends CommandBase {
         if (args.length < 1) {
             String modVersion = BedwarsMod.VERSION;
             UChat.chat(pfx + "&7You are using &bBedwars Mod v" + modVersion);
-        } else if (args[0].equalsIgnoreCase("update")){
+        } else if (args[0].equalsIgnoreCase("update")) {
             GithubAutoupdater.downloadAndReplaceMod();
+        } else if (args[0].equalsIgnoreCase("getstats")) {
+            UChat.chat(BedwarsMod.config.sessionStatsHUD.getSession().getSessionStats());
+        } else if (args[0].equalsIgnoreCase("resetsession")) {
+            BedwarsMod.config.sessionStatsHUD.getSession().resetSession();
+            UChat.chat("&aReset session stats.");
         }
     }
 

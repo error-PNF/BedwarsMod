@@ -1,4 +1,4 @@
-package me.errorpnf.bedwarsmod.utils.profileviewer;
+package me.errorpnf.bedwarsmod.features.profileviewer;
 
 import me.errorpnf.bedwarsmod.utils.RenderUtils;
 import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;

@@ -49,4 +49,8 @@ public class FormatUtils {
         BigDecimal bd = new BigDecimal(value).setScale(1, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    public static String removeResetCode(String input) {
+        return input.replaceAll("§r", "");
+    }
 }

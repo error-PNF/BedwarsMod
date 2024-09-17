@@ -7,8 +7,8 @@ import me.errorpnf.bedwarsmod.commands.BedwarsModCommand;
 import me.errorpnf.bedwarsmod.commands.MyCommand;
 import me.errorpnf.bedwarsmod.commands.PVCommand;
 import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
+import me.errorpnf.bedwarsmod.data.BedwarsGameTeamStatus;
 import me.errorpnf.bedwarsmod.features.FinalKillHearts;
-import me.errorpnf.bedwarsmod.utils.ClickChatForStats;
 import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -43,7 +43,8 @@ public class BedwarsMod {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new FinalKillHearts());
-        MinecraftForge.EVENT_BUS.register(new ClickChatForStats());
+        MinecraftForge.EVENT_BUS.register(new BedwarsGameTeamStatus());
+        //MinecraftForge.EVENT_BUS.register(new ClickChatForStats());
         EventManager.INSTANCE.register(new HypixelLocraw());
 
 

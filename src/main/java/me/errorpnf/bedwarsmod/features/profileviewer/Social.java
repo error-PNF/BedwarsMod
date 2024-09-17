@@ -1,4 +1,4 @@
-package me.errorpnf.bedwarsmod.utils.profileviewer;
+package me.errorpnf.bedwarsmod.features.profileviewer;
 
 public enum Social {
     TIKTOK("TIKTOK", "TikTok", 0),

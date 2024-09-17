@@ -1,0 +1,9 @@
+{
+  "gameStartPattern": "(?:\u00a7f\\s+)?\u00a7e\u00a7l(?:Collect Lucky Blocks from resource generators|Protect your bed and destroy the enemy beds\\.|Players swap teams at random intervals! Players)",
+  "gameEndPattern": "(?<team>\\w+)\\s+-(\\s+(?:\\[[^]]*]\\s+)?(\\w+)).",
+  "bedBreakPattern": "^BED DESTRUCTION > (?<team>\\w+) (?:Bed|Square|Star|Heart) .* (?:by|for|to|seeing) (?<player>\\w+)[!.']",
+  "finalKillPattern": "^(?<killed>\\w+)(?:'| ).* (?<killer>\\w+)[.!'].+FINAL KILL!",
+  "killPattern": "^\u00a7\\w(?<killed>\\w+) \u00a77.*(?:by|for|to|with|from|of|against|fighting|meet) \u00a7\\w(?<killer>\\w+)(?:\u00a77[.!']$|')",
+  "selfKillPattern": "^\u00a7\\w(?<killed>\\w+) \u00a77(?:fell into|died\\.|disconnected\\.)",
+  "teamEliminatedPattern": "^TEAM ELIMINATED > (?<team>\\w+) Team has been eliminated!"
+}

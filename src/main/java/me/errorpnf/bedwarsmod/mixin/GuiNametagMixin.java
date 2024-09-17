@@ -1,6 +1,6 @@
 package me.errorpnf.bedwarsmod.mixin;
 
-import me.errorpnf.bedwarsmod.utils.profileviewer.PVGui;
+import me.errorpnf.bedwarsmod.features.profileviewer.PVGui;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

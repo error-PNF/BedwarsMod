@@ -1,4 +1,4 @@
-package me.errorpnf.bedwarsmod.features;
+package me.errorpnf.bedwarsmod.data;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.*;
@@ -6,14 +6,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class FinalKillHearts {
-    public static boolean isFinalKill = false;
+public class BedwarsGameTeamStatus {
+    public static String getCurrentTeam() {
+        return currentTeam;
+    }
+
+    private static String currentTeam = "";
 
     @SubscribeEvent
     public void updateFinalKillStatus(TickEvent.ClientTickEvent event) {
@@ -31,8 +34,6 @@ public class FinalKillHearts {
             return;
         }
 
-        if (scoreboard.getTeams() == null) return;
-
         ScoreObjective sidebar = scoreboard.getObjectiveInDisplaySlot(1);
         if (sidebar != null) {
             List<Score> scores = new ArrayList<>(scoreboard.getScores());
@@ -43,18 +44,10 @@ public class FinalKillHearts {
                     .map(score -> score.getPlayerName() + getSuffixFromContainingTeam(scoreboard, score.getPlayerName()))
                     .collect(Collectors.toList());
 
-            for (String s : found) {
-                Pattern pattern = Pattern.compile("§a[0-9]§7 YOU");
-                Matcher matcher = pattern.matcher(s);
-
-                if (s.endsWith("§a§l✓§7 YOU")) {
-                    isFinalKill = false;
+            for (String scoreboardLine : found) {
+                if (scoreboardLine.endsWith("§7 YOU")) {
+                    currentTeam = findTeamColor(scoreboardLine);
                     return;
-                } else if (matcher.find()) {
-                    isFinalKill = true;
-                    return;
-                } else {
-                    isFinalKill = false;
                 }
             }
         }
@@ -68,4 +61,24 @@ public class FinalKillHearts {
         }
         return "";
     }
+
+    private String findTeamColor(String input) {
+        for (String color : TEAM_COLORS) {
+            if (input.contains(color)) {
+                return color;
+            }
+        }
+        return null;
+    }
+
+    public static final List<String> TEAM_COLORS = Arrays.asList(
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow",
+            "Aqua",
+            "White",
+            "Pink",
+            "Gray"
+    );
 }

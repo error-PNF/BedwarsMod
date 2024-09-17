@@ -1,10 +1,12 @@
 package me.errorpnf.bedwarsmod.config;
 
 import cc.polyfrost.oneconfig.config.Config;
+import cc.polyfrost.oneconfig.config.annotations.HUD;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
 import me.errorpnf.bedwarsmod.BedwarsMod;
+import me.errorpnf.bedwarsmod.features.SessionStatsHUD;
 
 public class BedwarsModConfig extends Config {
 
@@ -18,6 +20,12 @@ public class BedwarsModConfig extends Config {
                             "with mods such as VanillaHUD."
     )
     public static boolean shouldHardcore = false;
+
+    @HUD(
+            name = "Session Stats HUD",
+            category = "Stats"
+    )
+    public SessionStatsHUD sessionStatsHUD = new SessionStatsHUD();
 
     public BedwarsModConfig() {
         super(new Mod(BedwarsMod.NAME, ModType.UTIL_QOL, "/assets/bedwarsmod/textures/modicon.png"), BedwarsMod.MODID + ".json");

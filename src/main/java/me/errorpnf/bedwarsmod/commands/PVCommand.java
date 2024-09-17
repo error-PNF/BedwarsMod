@@ -7,7 +7,7 @@ import me.errorpnf.bedwarsmod.BedwarsMod;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
 import me.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
 import me.errorpnf.bedwarsmod.utils.StatUtils;
-import me.errorpnf.bedwarsmod.utils.profileviewer.PVGui;
+import me.errorpnf.bedwarsmod.features.profileviewer.PVGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.command.CommandBase;

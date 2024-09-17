@@ -22,14 +22,12 @@ public class ClickChatForStats {
     @SubscribeEvent
     public void onChatReceivedEvent(ClientChatReceivedEvent event) {
         if (!HypixelUtils.INSTANCE.isHypixel()) return;
-        if (HypixelLocraw.rawGameType.isEmpty() || !HypixelLocraw.rawGameType.contains("BEDWARS") || !HypixelLocraw.gamemode.contains("lobby")) {
+        if (HypixelLocraw.rawGameType.isEmpty() || !HypixelLocraw.rawGameType.contains("BEDWARS") || !HypixelLocraw.gamemode.contains("lobby") || event.message.getSiblings().isEmpty()) {
             return;
         }
 
 
-        if (event.message.getSiblings().isEmpty()) {
-            return; // Avoid accessing an empty list
-        }
+        // Avoid accessing an empty list
 
         IChatComponent lastComponent = event.message.getSiblings().get(event.message.getSiblings().size() - 1);
         ChatStyle style = lastComponent.getChatStyle();
@@ -40,6 +38,11 @@ public class ClickChatForStats {
                 return;
             }
         }
+
+        if (getUsername(event.message.getUnformattedText()) == null) {
+            return;
+        }
+
         style.setChatClickEvent(
                 new ClickEvent(ClickEvent.Action.RUN_COMMAND,
                         "/bws " + getUsername(event.message.getUnformattedText())));

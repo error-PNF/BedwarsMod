@@ -1,4 +1,4 @@
-package me.errorpnf.bedwarsmod.utils.profileviewer;
+package me.errorpnf.bedwarsmod.features.profileviewer;
 
 import com.google.gson.JsonObject;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
