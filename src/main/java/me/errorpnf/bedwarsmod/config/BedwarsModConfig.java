@@ -2,7 +2,9 @@ package me.errorpnf.bedwarsmod.config;
 
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.HUD;
+import cc.polyfrost.oneconfig.config.annotations.Info;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
+import cc.polyfrost.oneconfig.config.data.InfoType;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
 import me.errorpnf.bedwarsmod.BedwarsMod;
@@ -21,9 +23,17 @@ public class BedwarsModConfig extends Config {
     )
     public static boolean shouldHardcore = false;
 
+    @Info(
+            text = "Will add a way to rearrange/remove certain lines on the session display in the future.",
+            category = "Session",
+            size = 2,
+            type = InfoType.INFO
+    )
+    public static boolean ignored = true;
+
     @HUD(
             name = "Session Stats HUD",
-            category = "Stats"
+            category = "Session"
     )
     public SessionStatsHUD sessionStatsHUD = new SessionStatsHUD();
 

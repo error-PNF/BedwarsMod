@@ -29,7 +29,7 @@ public class BedwarsModCommand extends CommandBase {
         } else if (args[0].equalsIgnoreCase("update")) {
             GithubAutoupdater.downloadAndReplaceMod();
         } else if (args[0].equalsIgnoreCase("getstats")) {
-            UChat.chat(BedwarsMod.config.sessionStatsHUD.getSession().getSessionStats());
+            UChat.chat("there used to be something here");
         } else if (args[0].equalsIgnoreCase("resetsession")) {
             BedwarsMod.config.sessionStatsHUD.getSession().resetSession();
             UChat.chat("&aReset session stats.");

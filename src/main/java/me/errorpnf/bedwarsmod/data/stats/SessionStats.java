@@ -1,16 +1,18 @@
 package me.errorpnf.bedwarsmod.data.stats;
 
 import cc.polyfrost.oneconfig.config.annotations.Exclude;
+import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.errorpnf.bedwarsmod.data.BedwarsGameTeamStatus;
 import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
 import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -21,8 +23,6 @@ public class SessionStats {
 
     // add a crap ton of @Exclude annotations so oneconfig doesn't try to save these variables in the mod's config file
 
-    @Exclude
-    public int gamesStarted = 0;
     @Exclude
     public int gamesEnded = 0;
     @Exclude
@@ -41,6 +41,10 @@ public class SessionStats {
     public int wins = 0;
     @Exclude
     public int losses = 0;
+    @Exclude
+    public int winstreak = 0;
+    @Exclude
+    public int gamesPlayed = 0;
 
     @Exclude
     private Pattern gameStartPattern;
@@ -57,7 +61,14 @@ public class SessionStats {
 
     @Exclude
     public String sessionUsername;
-    
+
+    @Exclude
+    public boolean isTimerRunning = false;
+    @Exclude
+    public int gameTimeTicks = 0;
+    @Exclude
+    public int totalSessionTimeTicks = 0;
+
     public SessionStats(String sessionUsername) {
         this.sessionUsername = sessionUsername;
         loadPatternsFromJson();
@@ -89,25 +100,28 @@ public class SessionStats {
 
     @SubscribeEvent
     public void onClientChatReceived(ClientChatReceivedEvent event) {
-        if (!HypixelLocraw.isInBedwarsGame()) return;
-
         String message = FormatUtils.removeResetCode(event.message.getFormattedText());
         String unformattedMessage = event.message.getUnformattedText();
 
         Matcher matcher;
 
         if (gameStartPattern.matcher(message).matches()) {
-            gamesStarted++;
-            notifyUser("Game started! Session starts: " + gamesStarted);
-        } else if ((matcher = gameEndPattern.matcher(unformattedMessage)).find()) {
+            startGameTimer();
+        }
+
+        if (!HypixelLocraw.isInBedwarsGame) return;
+
+        if ((matcher = gameEndPattern.matcher(unformattedMessage)).find()) {
             String matchedTeam = matcher.group("team");
             gamesEnded++;
-            notifyUser("Game Ended: " + gamesEnded);
+            stopGameTimer();
             if (matchedTeam.contains(BedwarsGameTeamStatus.getCurrentTeam())) {
                 wins++;
+                winstreak++;
             } else {
                 if (!unformattedMessage.contains("Killer")) {
                     losses++;
+                    winstreak = 0;
                 }
             }
         } else if (unformattedMessage.startsWith("BED DESTRUCTION")) {
@@ -128,12 +142,10 @@ public class SessionStats {
 
                 if (killer.equalsIgnoreCase(sessionUsername)) {
                     finalKills++;
-                    notifyUser("Final Kill! Session final kills: " + finalKills);
                 }
 
                 if (killed.equalsIgnoreCase(sessionUsername)) {
                     finalDeaths++;
-                    notifyUser("Final Death! Session final deaths: " + finalDeaths);
                 }
             }
         } else if ((matcher = killPattern.matcher(message)).find()) {
@@ -142,40 +154,76 @@ public class SessionStats {
 
             if (killer.equalsIgnoreCase(sessionUsername)) {
                 kills++;
-                notifyUser("Kill! Session kills: " + kills);
             }
 
             if (killed.equalsIgnoreCase(sessionUsername)) {
                 deaths++;
-                notifyUser("Death! Session deaths: " + deaths);
             }
         } else if ((matcher = selfKillPattern.matcher(message)).find()) {
             String killed = matcher.group("killed");
             deaths++;
-            notifyUser("Self kill! Session self kills: " + deaths);
         } else {
             System.out.println("No pattern matched for message: " + message);
         }
     }
 
-    private void notifyUser(String message) {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(message));
+    private void startGameTimer() {
+        gameTimeTicks = 0;
+        gamesPlayed++;
+        isTimerRunning = true;
     }
 
-    public String getSessionStats() {
-        return String.format(
-                "Session Stats:\n" +
-                        "Games Started: %d\n" +
-                        "Beds Broken: %d\n" +
-                        "Final Kills: %d\n" +
-                        "Regular Kills: %d\n" +
-                        "Self Kills: %d\n",
-                gamesStarted, bedsBroken, finalKills, kills, deaths
-        );
+    private void continueTimer() {
+        if (!(gamesPlayed > 0)) gamesPlayed ++;
+        isTimerRunning = true;
+    }
+
+    private void stopGameTimer() {
+        if (!isTimerRunning) return;
+
+        isTimerRunning = false;
+    }
+
+    @Exclude
+    private boolean didJoinWorld = false;
+
+    @SubscribeEvent
+    public void onWorldJoin(EntityJoinWorldEvent event) {
+        if (event.entity == Minecraft.getMinecraft().thePlayer) {
+            if (HypixelUtils.INSTANCE.isHypixel()) {
+                didJoinWorld = true;
+            }
+        }
+    }
+
+
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if (HypixelLocraw.isInBedwarsGame) {
+            if (!isTimerRunning) {
+                continueTimer();
+            }
+        } else {
+            stopGameTimer();
+        }
+
+//        if (HypixelLocraw.hasUpdatedLastGameServer && didJoinWorld && !HypixelLocraw.lastBedwarsGameServerID.isEmpty()) {
+//            HypixelLocraw.hasUpdatedLastGameServer = false;
+//            if (HypixelLocraw.lastBedwarsGameServerID.equals(HypixelLocraw.serverID)) {
+//                continueTimer();
+//            }
+//
+//            didJoinWorld = false;
+//        }
+
+
+        if (isTimerRunning && event.phase == TickEvent.Phase.START) {
+            gameTimeTicks++;
+            totalSessionTimeTicks++;
+        }
     }
 
     public void resetSession() {
-        gamesStarted = 0;
         bedsBroken = 0;
         bedsLost = 0;
         finalKills = 0;
@@ -184,5 +232,16 @@ public class SessionStats {
         deaths = 0;
         wins = 0;
         losses = 0;
+        gamesPlayed = 0;
     }
+
+    private String formatTime(int ticks) {
+        int seconds = ticks / 40;
+        int minutes = seconds / 60;
+        int hours = minutes / 60;
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
 }
