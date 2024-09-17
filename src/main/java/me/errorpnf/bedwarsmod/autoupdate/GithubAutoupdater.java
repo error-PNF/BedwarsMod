@@ -95,6 +95,8 @@ public class GithubAutoupdater {
     }
 
 
+    private static String changelog = "";
+
     public static void checkForUpdates() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -116,18 +118,19 @@ public class GithubAutoupdater {
                     return;
                 }
 
-
                 try {
                     String jsonResponse = getJsonFromUrl(GITHUB_API_URL);
                     JsonObject json = new JsonParser().parse(jsonResponse).getAsJsonObject();
                     latestVersion = json.get("tag_name").getAsString().replace("v", "");
                     downloadUrl = json.get("assets").getAsJsonArray().get(0).getAsJsonObject().get("browser_download_url").getAsString();
+                    changelog = json.get("body").getAsString(); // Extract changelog
 
                     String currentVersion = BedwarsMod.VERSION;
 
                     System.out.println("Current Mod Version: " + currentVersion);
                     System.out.println("Latest version from GitHub: " + latestVersion);
                     System.out.println("Download URL: " + downloadUrl);
+                    System.out.println("Changelog: " + changelog); // Print changelog
 
                     if (!latestVersion.equals(currentVersion)) {
                         isOutdated = true;
@@ -143,6 +146,7 @@ public class GithubAutoupdater {
         });
     }
 
+
     @SubscribeEvent
     public void onPlayerLoggedIn(EntityJoinWorldEvent event) {
         if (!isOutdated || hasPromptedUpdate || event.entity != Minecraft.getMinecraft().thePlayer) return;
@@ -154,11 +158,16 @@ public class GithubAutoupdater {
         IChatComponent downloadLink = new ChatComponentText(pfx + FormatUtils.format("&7Click &b&nhere &r&7to download."));
         downloadLink.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/bedwarsmod update"));
 
+        // Include changelog in the message
+        IChatComponent changelogMessage = new ChatComponentText(pfx + FormatUtils.format("&aChangelog:\n&7" + changelog));
+
         UChat.chat(pfx + "&cAlert!");
         Minecraft.getMinecraft().thePlayer.addChatMessage(message);
         Minecraft.getMinecraft().thePlayer.addChatMessage(downloadLink);
+        Minecraft.getMinecraft().thePlayer.addChatMessage(changelogMessage); // Send changelog to player
         UChat.chat(pfx + "&cBedwars Mod v" + currentVersion + " &b-> " + "&aBedwars Mod v" + latestVersion);
     }
+
 
     public static void downloadAndReplaceMod() {
         try {
