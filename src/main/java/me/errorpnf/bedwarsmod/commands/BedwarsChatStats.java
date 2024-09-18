@@ -2,6 +2,7 @@ package me.errorpnf.bedwarsmod.commands;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
+import me.errorpnf.bedwarsmod.BedwarsMod;
 import me.errorpnf.bedwarsmod.utils.ApiUtils;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
 import me.errorpnf.bedwarsmod.data.PrestigeList;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BedwarsChatStats extends CommandBase {
-    public static final String pfx = "&c[&fBW&c] &r";
+    public static final String pfx = BedwarsMod.prefix;
 
     @Override
     public String getCommandName() {

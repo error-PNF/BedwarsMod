@@ -26,9 +26,6 @@ public class ClickChatForStats {
             return;
         }
 
-
-        // Avoid accessing an empty list
-
         IChatComponent lastComponent = event.message.getSiblings().get(event.message.getSiblings().size() - 1);
         ChatStyle style = lastComponent.getChatStyle();
         ClickEvent clickEvent = lastComponent.getChatStyle().getChatClickEvent();

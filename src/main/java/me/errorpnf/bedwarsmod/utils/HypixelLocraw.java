@@ -29,7 +29,11 @@ public class HypixelLocraw {
         hasUpdatedLastGameServer = true;
     }
 
-    public static boolean isInBedwarsGame = false;
+    public static boolean getIsInBedwarsGame() {
+        return isInBedwarsGame;
+    }
+
+    private static boolean isInBedwarsGame = false;
 
     @Subscribe
     public void onTick(TickEvent event) {

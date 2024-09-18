@@ -13,15 +13,21 @@ import java.util.regex.Pattern;
 
 public class SessionStatsHUD extends TextHud {
 
-    public SessionStats getSession() {
-        return session;
-    }
-
     @Exclude
-    private SessionStats session = new SessionStats("");
+    public static boolean queueReset = false;
+
+
+    // this fixes some weird bug I ran into causing the SessionStats class to get registered twice, giving me some unfavorable problems.
+    // I had to do this because the SessionStatsHUD class was getting registered twice and couldn't figure out why, so I just stopped the SessionStats from getting double registered.
+    @Exclude
+    private static boolean registered = false;
+    // this is so stupid it just might work
+    @Exclude
+    public SessionStats session = (!registered) ? null : new SessionStats("");
 
     public SessionStatsHUD() {
         super(true);
+        registered = true;
     }
 
     @Exclude
@@ -42,6 +48,11 @@ public class SessionStatsHUD extends TextHud {
         if (!createdSession) {
             session.sessionUsername = Minecraft.getMinecraft().thePlayer.getName();
             createdSession = true;
+        }
+
+        if (queueReset) {
+            session.resetSession();
+            queueReset = false;
         }
 
         Minecraft minecraft = Minecraft.getMinecraft();
@@ -79,10 +90,8 @@ public class SessionStatsHUD extends TextHud {
         }
 
         double sessionAvgGameTimeTicks;
-        if (session.gamesPlayed == 0) {
+        if (session.gamesPlayed == 1) {
             sessionAvgGameTimeTicks = session.totalSessionTimeTicks;
-        } else if (session.isTimerRunning) {
-            sessionAvgGameTimeTicks = (double) session.totalSessionTimeTicks / (session.gamesPlayed + 1);
         } else {
             sessionAvgGameTimeTicks = (double) session.totalSessionTimeTicks / session.gamesPlayed;
         }
@@ -118,7 +127,7 @@ public class SessionStatsHUD extends TextHud {
         lines.add("§fAVG Game Time: §b" + formatTime((int) sessionAvgGameTimeTicks));
     }
 
-    public static String formatTime(int ticks) {
+    public String formatTime(int ticks) {
         int totalSeconds = ticks / 20;
         int hours = totalSeconds / 3600;
         int minutes = (totalSeconds % 3600) / 60;

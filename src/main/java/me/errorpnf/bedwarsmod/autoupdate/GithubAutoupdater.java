@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 public class GithubAutoupdater {
-    public static final String pfx = FormatUtils.format("&c[&fBW&c] &r");
+    public static final String pfx = BedwarsMod.prefix;
 
     private static final String GITHUB_API_URL = "https://api.github.com/repos/error-PNF/BedwarsMod/releases/latest";
     private static String latestVersion;

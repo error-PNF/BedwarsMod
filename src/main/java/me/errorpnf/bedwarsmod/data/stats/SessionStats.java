@@ -1,16 +1,21 @@
 package me.errorpnf.bedwarsmod.data.stats;
 
 import cc.polyfrost.oneconfig.config.annotations.Exclude;
-import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import me.errorpnf.bedwarsmod.BedwarsMod;
 import me.errorpnf.bedwarsmod.data.BedwarsGameTeamStatus;
+import me.errorpnf.bedwarsmod.mixin.MixinGuiPlayerTabOverlay;
 import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
 import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.event.HoverEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -20,8 +25,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SessionStats {
-
     // add a crap ton of @Exclude annotations so oneconfig doesn't try to save these variables in the mod's config file
+    @Exclude
+    private final String pfx = BedwarsMod.prefix;
 
     @Exclude
     public int gamesEnded = 0;
@@ -109,12 +115,15 @@ public class SessionStats {
             startGameTimer();
         }
 
-        if (!HypixelLocraw.isInBedwarsGame) return;
+        if (!HypixelLocraw.getIsInBedwarsGame()) return;
 
         if ((matcher = gameEndPattern.matcher(unformattedMessage)).find()) {
             String matchedTeam = matcher.group("team");
             gamesEnded++;
             stopGameTimer();
+
+            queueGloatStats();
+
             if (matchedTeam.contains(BedwarsGameTeamStatus.getCurrentTeam())) {
                 wins++;
                 winstreak++;
@@ -167,55 +176,46 @@ public class SessionStats {
         }
     }
 
+    @Exclude
+    private boolean hasGameEnded = false;
+
     private void startGameTimer() {
+        hasGameEnded = false;
         gameTimeTicks = 0;
         gamesPlayed++;
         isTimerRunning = true;
     }
 
     private void continueTimer() {
-        if (!(gamesPlayed > 0)) gamesPlayed ++;
+        if (!(gamesPlayed > 0)) gamesPlayed++;
+        if (hasGameEnded) return;
+
         isTimerRunning = true;
     }
 
     private void stopGameTimer() {
         if (!isTimerRunning) return;
 
+        hasGameEnded = true;
         isTimerRunning = false;
     }
 
-    @Exclude
-    private boolean didJoinWorld = false;
-
-    @SubscribeEvent
-    public void onWorldJoin(EntityJoinWorldEvent event) {
-        if (event.entity == Minecraft.getMinecraft().thePlayer) {
-            if (HypixelUtils.INSTANCE.isHypixel()) {
-                didJoinWorld = true;
-            }
-        }
-    }
-
-
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (HypixelLocraw.isInBedwarsGame) {
+        if (isGloatQueued) {
+            gloatTicks++;
+            if (gloatTicks > 40) {
+                gloatStats();
+            }
+        }
+
+        if (HypixelLocraw.getIsInBedwarsGame()) {
             if (!isTimerRunning) {
                 continueTimer();
             }
         } else {
             stopGameTimer();
         }
-
-//        if (HypixelLocraw.hasUpdatedLastGameServer && didJoinWorld && !HypixelLocraw.lastBedwarsGameServerID.isEmpty()) {
-//            HypixelLocraw.hasUpdatedLastGameServer = false;
-//            if (HypixelLocraw.lastBedwarsGameServerID.equals(HypixelLocraw.serverID)) {
-//                continueTimer();
-//            }
-//
-//            didJoinWorld = false;
-//        }
-
 
         if (isTimerRunning && event.phase == TickEvent.Phase.START) {
             gameTimeTicks++;
@@ -235,13 +235,64 @@ public class SessionStats {
         gamesPlayed = 0;
     }
 
-    private String formatTime(int ticks) {
-        int seconds = ticks / 40;
-        int minutes = seconds / 60;
-        int hours = minutes / 60;
-        seconds = seconds % 60;
-        minutes = minutes % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+    @Exclude
+    private boolean isGloatQueued = false;
+    @Exclude
+    private int gloatTicks = 0;
+
+    public void queueGloatStats() {
+        isGloatQueued = true;
+        gloatTicks = 0;
     }
 
+    private void gloatStats() {
+        isGloatQueued = false;
+        gloatTicks = 0;
+
+        Minecraft minecraft = Minecraft.getMinecraft();
+        if (minecraft == null || minecraft.ingameGUI == null) {
+            return;
+        }
+
+        Object tabList = minecraft.ingameGUI.getTabList();
+        if (!(tabList instanceof MixinGuiPlayerTabOverlay)) {
+            return;
+        }
+
+        MixinGuiPlayerTabOverlay tabData = (MixinGuiPlayerTabOverlay) tabList;
+        if (tabData.getTabFooter() == null) {
+            return;
+        }
+
+        String footerData = tabData.getTabFooter().getUnformattedText();
+        if (footerData == null) {
+            return;
+        }
+
+
+        Pattern pattern = Pattern.compile("Kills: (\\d+).*?Final Kills: (\\d+).*?Beds Broken: (\\d+)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(footerData);
+
+        int kills = 0;
+        int finalKills = 0;
+        int bedsBroken = 0;
+
+        if (matcher.find()) {
+            kills = Integer.parseInt(matcher.group(1));
+            finalKills = Integer.parseInt(matcher.group(2));
+            bedsBroken = Integer.parseInt(matcher.group(3));
+        }
+
+        String statsString = "Kills: " + kills + " | Finals: " + finalKills + " | Beds: " + bedsBroken;
+
+        String formattedMessage = FormatUtils.format(pfx + "&7Click &b&nhere&r &7to copy this game's stats to your clipboard.");
+        IChatComponent chatComponent = new ChatComponentText(formattedMessage)
+                .setChatStyle(new ChatStyle()
+                        .setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/bedwarsmod copytexttoclipboard " + statsString))
+                        .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
+                                FormatUtils.format("&7Click to copy your stats from the last game.")))));
+
+        Minecraft.getMinecraft().thePlayer.addChatMessage(chatComponent);
+    }
 }

@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PVCommand extends CommandBase {
-    public static final String pfx = "&c[&fBW&c] &r";
+    public static final String pfx = BedwarsMod.prefix;
 
     @Override
     public String getCommandName() {

@@ -10,6 +10,7 @@ import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
 import me.errorpnf.bedwarsmod.data.BedwarsGameTeamStatus;
 import me.errorpnf.bedwarsmod.features.FinalKillHearts;
 import me.errorpnf.bedwarsmod.utils.HypixelLocraw;
+import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -25,6 +26,7 @@ public class BedwarsMod {
     public static final String NAME = "@NAME@";
     public static final String VERSION = "@VER@";
     public GuiScreen openGui = null;
+    public static final String prefix = FormatUtils.format("&c[&fBW&c] &r");
 
     // Sets the variables from `gradle.properties`. See the `blossom` config in `build.gradle.kts`.
     @Mod.Instance(MODID)

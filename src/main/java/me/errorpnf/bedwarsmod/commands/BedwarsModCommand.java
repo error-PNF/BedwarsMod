@@ -7,9 +7,13 @@ import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.util.ChatComponentText;
+
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 public class BedwarsModCommand extends CommandBase {
-    public static final String pfx = FormatUtils.format("&c[&fBW&c] &r");
+    public static final String pfx = BedwarsMod.prefix;
 
     @Override
     public String getCommandName() {
@@ -18,7 +22,7 @@ public class BedwarsModCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Command for Bedwars Mod.";
+        return "Command for the Bedwars Mod.";
     }
 
     @Override
@@ -31,8 +35,18 @@ public class BedwarsModCommand extends CommandBase {
         } else if (args[0].equalsIgnoreCase("getstats")) {
             UChat.chat("there used to be something here");
         } else if (args[0].equalsIgnoreCase("resetsession")) {
-            BedwarsMod.config.sessionStatsHUD.getSession().resetSession();
+            //SessionStatsHUD.queueReset = true;
             UChat.chat("&aReset session stats.");
+        } else if (args[0].equalsIgnoreCase("copytexttoclipboard")) {
+            StringBuilder textToCopy = new StringBuilder();
+            for (int i = 1; i < args.length; i++) {
+                textToCopy.append(args[i]).append(" ");
+            }
+
+            String text = textToCopy.toString().trim();
+            copyTextToClipboard(text);
+
+            sender.addChatMessage(new ChatComponentText(pfx + FormatUtils.format("&7Copied text to the clipboard.")));
         }
     }
 
@@ -41,7 +55,8 @@ public class BedwarsModCommand extends CommandBase {
         return true;
     }
 
-    private static void checkForUpdates() {
-
+    private void copyTextToClipboard(String text) {
+        StringSelection stringSelection = new StringSelection(text);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
     }
 }
