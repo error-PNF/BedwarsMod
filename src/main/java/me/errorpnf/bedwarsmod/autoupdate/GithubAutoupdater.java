@@ -124,6 +124,7 @@ public class GithubAutoupdater {
                     latestVersion = json.get("tag_name").getAsString().replace("v", "");
                     downloadUrl = json.get("assets").getAsJsonArray().get(0).getAsJsonObject().get("browser_download_url").getAsString();
                     changelog = json.get("body").getAsString(); // Extract changelog
+                    changelog = changelog.replaceAll("\r\n", "\n§7");
 
                     String currentVersion = BedwarsMod.VERSION;
 
@@ -161,7 +162,6 @@ public class GithubAutoupdater {
         // Include changelog in the message
         IChatComponent changelogMessage = new ChatComponentText(pfx + FormatUtils.format("&aChangelog:\n&7" + changelog));
 
-        UChat.chat(pfx + "&cAlert!");
         Minecraft.getMinecraft().thePlayer.addChatMessage(message);
         Minecraft.getMinecraft().thePlayer.addChatMessage(downloadLink);
         Minecraft.getMinecraft().thePlayer.addChatMessage(changelogMessage); // Send changelog to player
