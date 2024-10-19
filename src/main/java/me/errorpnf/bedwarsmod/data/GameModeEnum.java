@@ -12,31 +12,31 @@ public enum GameModeEnum {
     FOUR_FOUR("4s", "4v4v4v4", "Core Modes"),
     TWO_FOUR("4v4", "4v4", "4v4"),
 
-    CASTLE("Castle", "Castle", "Castle"),
+    CASTLE("Castle", "Castle"),
 
-    OVERALL_LUCKY("Lucky Overall", "Lucky Overall", "Lucky Blocks"),
-    EIGHT_TWO_LUCKY("Lucky Doubles", "Lucky Doubles", "Lucky Blocks"),
-    FOUR_FOUR_LUCKY("Lucky Fours", "Lucky Fours", "Lucky Blocks"),
+    OVERALL_LUCKY("Lucky Overall", "Lucky Blocks"),
+    EIGHT_TWO_LUCKY("Lucky Doubles", "Lucky Blocks"),
+    FOUR_FOUR_LUCKY("Lucky Fours", "Lucky Blocks"),
 
-    OVERALL_RUSH("Rush Overall", "Rush Overall", "Rush"),
-    EIGHT_TWO_RUSH("Rush Doubles", "Rush Doubles", "Rush"),
-    FOUR_FOUR_RUSH("Rush Fours", "Rush Fours", "Rush"),
+    OVERALL_RUSH("Rush Overall", "Rush"),
+    EIGHT_TWO_RUSH("Rush Doubles", "Rush"),
+    FOUR_FOUR_RUSH("Rush Fours", "Rush"),
 
-    OVERALL_VOIDLESS("Voidless Overall", "Voidless Overall", "Voidless"),
-    EIGHT_TWO_VOIDLESS("Voidless Doubles", "Voidless Doubles", "Voidless"),
-    FOUR_FOUR_VOIDLESS("Voidless Fours", "Voidless Fours", "Voidless"),
+    OVERALL_VOIDLESS("Voidless Overall", "Voidless"),
+    EIGHT_TWO_VOIDLESS("Voidless Doubles", "Voidless"),
+    FOUR_FOUR_VOIDLESS("Voidless Fours", "Voidless"),
 
-    OVERALL_ARMED("Armed Overall", "Armed Overall", "Armed"),
-    EIGHT_TWO_ARMED("Armed Doubles", "Armed Doubles", "Armed"),
-    FOUR_FOUR_ARMED("Armed Fours", "Armed Fours", "Armed"),
+    OVERALL_ARMED("Armed Overall", "Armed"),
+    EIGHT_TWO_ARMED("Armed Doubles", "Armed"),
+    FOUR_FOUR_ARMED("Armed Fours", "Armed"),
 
-    OVERALL_ULTIMATE("Ultimate Overall", "Ultimate Overall", "Ultimate"),
-    EIGHT_TWO_ULTIMATE("Ultimate Doubles", "Ultimate Doubles", "Ultimate"),
-    FOUR_FOUR_ULTIMATE("Ultimate Fours", "Ultimate Fours", "Ultimate"),
+    OVERALL_ULTIMATE("Ultimate Overall", "Ultimate"),
+    EIGHT_TWO_ULTIMATE("Ultimate Doubles", "Ultimate"),
+    FOUR_FOUR_ULTIMATE("Ultimate Fours", "Ultimate"),
 
     OVERALL_SWAP("Swap Overall", "Swap Overall", "Swap"),
-    EIGHT_TWO_SWAP("Swap Doubles", "Swap Doubles", "Swap"),
-    FOUR_FOUR_SWAP("Swap Fours", "Swap Fours", "Swap");
+    EIGHT_TWO_SWAP("Swap Doubles", "Swap"),
+    FOUR_FOUR_SWAP("Swap Fours", "Swap");
 
     private final String shortName;
     private final String fullName;
@@ -45,6 +45,11 @@ public enum GameModeEnum {
     GameModeEnum(String shortName, String fullName, String category) {
         this.shortName = shortName;
         this.fullName = fullName;
+        this.category = category;
+    }
+    GameModeEnum(String name, String category) {
+        this.shortName = name;
+        this.fullName = name;
         this.category = category;
     }
 
