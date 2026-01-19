@@ -1,6 +1,8 @@
 package me.errorpnf.bedwarsmod.utils;
 
 import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
+import cc.polyfrost.oneconfig.utils.hypixel.LocrawInfo;
+import cc.polyfrost.oneconfig.utils.hypixel.LocrawUtil;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
@@ -21,8 +23,11 @@ public class ClickChatForStats {
 
     @SubscribeEvent
     public void onChatReceivedEvent(ClientChatReceivedEvent event) {
+        LocrawInfo locrawUtil = LocrawUtil.INSTANCE.getLastLocrawInfo();
         if (!HypixelUtils.INSTANCE.isHypixel()) return;
-        if (HypixelLocraw.rawGameType.isEmpty() || !HypixelLocraw.rawGameType.contains("BEDWARS") || !HypixelLocraw.gamemode.contains("lobby") || event.message.getSiblings().isEmpty()) {
+        if (locrawUtil == null) return;
+
+        if (!HypixelLocraw.isInBedwarsGame() && !HypixelLocraw.isInBedwarsLobby() && event.message.getSiblings().isEmpty()) {
             return;
         }
 
@@ -49,7 +54,7 @@ public class ClickChatForStats {
                         new ChatComponentText("§aView the stats of §3" + getUsername(event.message.getUnformattedText()))));
     }
 
-    public static String getUsername(String chatMessage) {
+    public String getUsername(String chatMessage) {
         String msg = chatMessage.replaceAll(FORMAT_PATTERN.pattern(), "");
         Matcher matcher = CHAT_PATTERN.matcher(msg);
         if (matcher.matches()) {

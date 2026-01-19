@@ -16,7 +16,7 @@ public class BedwarsModConfig extends Config {
             description =
                     "Makes your hearts appear to be hardcore hearts\n" +
                             "when you lose your bed.\n\n" +
-                    "[WARNING] This may cause incompatibility issues\n" +
+                            "[WARNING] This may cause incompatibility issues\n" +
                             "with mods such as VanillaHUD.",
             size = 2
     )
@@ -50,8 +50,8 @@ public class BedwarsModConfig extends Config {
     @Switch(
             name = "Only Show HUD in Game",
             description = "Disables the Session Stats HUD when you are not\n" +
-                            "actively in a Bedwars game. However, this does not\n" +
-                            "reset or clear your stats for the session.",
+                    "actively in a Bedwars game. However, this does not\n" +
+                    "reset or clear your stats for the session.",
             category = "Session",
             subcategory = "HUD Behavior"
     )

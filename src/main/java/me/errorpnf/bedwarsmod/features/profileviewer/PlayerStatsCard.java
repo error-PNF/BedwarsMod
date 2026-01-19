@@ -10,24 +10,24 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 
 public class PlayerStatsCard extends GuiScreen {
-    private static final Minecraft mc = Minecraft.getMinecraft();
-    private static JsonObject jsonObject;
-    private static FontRenderer fontRenderer;
-    private static GameModeEnum gamemode;
+    private final Minecraft mc = Minecraft.getMinecraft();
+    private final JsonObject jsonObject;
+    private final FontRenderer fontRenderer;
+    private final GameModeEnum gamemode;
 
     public PlayerStatsCard(JsonObject jsonObject, FontRenderer fontRenderer, GameModeEnum gamemode) {
-        PlayerStatsCard.jsonObject = jsonObject;
-        PlayerStatsCard.fontRenderer = fontRenderer;
-        PlayerStatsCard.gamemode = gamemode;
+        this.jsonObject = jsonObject;
+        this.fontRenderer = fontRenderer;
+        this.gamemode = gamemode;
     }
 
     public void drawStatsCard(float centerX, float y, int mouseX, int mouseY) {
         String titleAndModeName = FormatUtils.format("&cBedwars &fStats &f(" + gamemode.getFullName() + ")");
 
         RenderUtils.drawStringCenteredScaled(fontRenderer, titleAndModeName, centerX, y + 11.5f, true, 0, 1.25f);
-        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getLeftText(), centerX - ((430f * 2/3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
-        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getCenterText(), centerX - ((134f * 2/3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
-        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getRightText(), centerX + ((162f * 2/3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
+        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getLeftText(), centerX - ((430f * 2 / 3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
+        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getCenterText(), centerX - ((134f * 2 / 3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
+        RenderUtils.drawStringWithNewlinesScaled(fontRenderer, getRightText(), centerX + ((162f * 2 / 3f) / 2f), y + 21f, true, 0, 5f, 5f, 0.825f);
     }
 
     private String getLeftText() {

@@ -146,8 +146,6 @@ public class PrintChatStats {
         }
     }
 
-
-
     public static void printChatModes(String username, GameModeEnum currentMode) {
         IChatComponent message = new ChatComponentText(FormatUtils.format(pfx));
 

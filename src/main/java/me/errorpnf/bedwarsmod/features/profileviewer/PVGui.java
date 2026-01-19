@@ -26,16 +26,12 @@ import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import static java.lang.Math.floor;
-import static java.lang.Math.min;
 
 public class PVGui extends GuiScreen {
     private static int guiLeft;
@@ -120,7 +116,7 @@ public class PVGui extends GuiScreen {
         renderDrawnEntity(mouseX, mouseY, partialTicks, configScale);
         renderingNametag = false;
 
-        renderTopCard(guiLeftAbsolute + (325f * 2f/3f), guiTopAbsolute + 20, 2, mouseX, mouseY);
+        renderTopCard(guiLeftAbsolute + (325f * 2f / 3f), guiTopAbsolute + 20, 2, mouseX, mouseY);
 
         // TODO Fix mouse scaling with this
         PlayerSocials playerSocials = new PlayerSocials(playerData, username, fontRendererObj);
@@ -133,7 +129,7 @@ public class PVGui extends GuiScreen {
         );
 
         PlayerStatsCard playerStatsCard = new PlayerStatsCard(playerData, fontRendererObj, gamemode);
-        playerStatsCard.drawStatsCard(guiLeftAbsolute + (410f * 2f/3f), guiTopAbsolute + (195 * 1f/3f), mouseX, mouseY);
+        playerStatsCard.drawStatsCard(guiLeftAbsolute + (410f * 2f / 3f), guiTopAbsolute + (195 * 1f / 3f), mouseX, mouseY);
 
         if (leftButton.getWasClicked()) {
             // cycle through category
@@ -153,56 +149,56 @@ public class PVGui extends GuiScreen {
         leftButton.drawButton(
                 guiLeftAbsolute,
                 guiTopAbsolute,
-                guiLeftAbsolute + ((370 * 2f/3f) / 2),
-                guiTopAbsolute + ((594 * 2f/3f) / 2),
-                (440f * 2f/3f) / 2, // 146.667
-                (59 * 2f/3f) / 2, // 19.667...
+                guiLeftAbsolute + ((370 * 2f / 3f) / 2),
+                guiTopAbsolute + ((594 * 2f / 3f) / 2),
+                (440f * 2f / 3f) / 2, // 146.667
+                (59 * 2f / 3f) / 2, // 19.667...
                 scaledMouseX,
                 scaledMouseY,
                 categoryText,
                 0,
                 fontRendererObj,
-                guiLeftAbsolute + ((370 * 2f/3f) * configScale / 2),
-                guiTopAbsolute + ((594 * 2f/3f) * configScale / 2),
-                (440f * 2f/3f) * configScale / 2, // 146.667
-                (59 * 2f/3f) * configScale / 2 // 19.667...
+                guiLeftAbsolute + ((370 * 2f / 3f) * configScale / 2),
+                guiTopAbsolute + ((594 * 2f / 3f) * configScale / 2),
+                (440f * 2f / 3f) * configScale / 2, // 146.667
+                (59 * 2f / 3f) * configScale / 2 // 19.667...
         );
 
         rightButton.drawButton(
                 guiLeftAbsolute,
                 guiTopAbsolute,
-                guiLeftAbsolute + ((830 * 2f/3f) / 2),
-                guiTopAbsolute + ((594 * 2f/3f) / 2),
-                (440f * 2f/3f) / 2,
-                (59 * 2f/3f) / 2,
+                guiLeftAbsolute + ((830 * 2f / 3f) / 2),
+                guiTopAbsolute + ((594 * 2f / 3f) / 2),
+                (440f * 2f / 3f) / 2,
+                (59 * 2f / 3f) / 2,
                 scaledMouseX,
                 scaledMouseY,
                 modeText,
                 1,
                 fontRendererObj,
-                guiLeftAbsolute + ((830 * 2f/3f) * configScale / 2),
-                guiTopAbsolute + ((594 * 2f/3f) * configScale / 2),
-                (440f * 2f/3f) * configScale / 2,
-                (59 * 2f/3f) * configScale / 2
+                guiLeftAbsolute + ((830 * 2f / 3f) * configScale / 2),
+                guiTopAbsolute + ((594 * 2f / 3f) * configScale / 2),
+                (440f * 2f / 3f) * configScale / 2,
+                (59 * 2f / 3f) * configScale / 2
         );
 
         searchBox.draw(
                 guiLeftAbsolute,
                 guiTopAbsolute,
-                guiLeftAbsolute + ((30 * 2f/3f) / 2) - 0.5f,
-                guiTopAbsolute + ((594 * 2f/3f) / 2) + 0.5f,
-                (310f * 2f/3f) / 2,
-                (59 * 2f/3f) / 2,
+                guiLeftAbsolute + ((30 * 2f / 3f) / 2) - 0.5f,
+                guiTopAbsolute + ((594 * 2f / 3f) / 2) + 0.5f,
+                (310f * 2f / 3f) / 2,
+                (59 * 2f / 3f) / 2,
                 scaledMouseX,
                 scaledMouseY,
                 fontRendererObj,
-                guiLeftAbsolute + ((30 * 2f/3f) * configScale / 2) - 0.5f,
-                guiTopAbsolute + ((594 * 2f/3f) * configScale / 2) + 0.5f,
-                (310f * 2f/3f) * configScale / 2,
-                (59 * 2f/3f) * configScale / 2
+                guiLeftAbsolute + ((30 * 2f / 3f) * configScale / 2) - 0.5f,
+                guiTopAbsolute + ((594 * 2f / 3f) * configScale / 2) + 0.5f,
+                (310f * 2f / 3f) * configScale / 2,
+                (59 * 2f / 3f) * configScale / 2
         );
         CornerCard cornerCard = new CornerCard();
-        cornerCard.drawCard(guiLeftAbsolute + ((970 * 2f/3f) / 2), guiTopAbsolute + 20, fontRendererObj, playerData);
+        cornerCard.drawCard(guiLeftAbsolute + ((970 * 2f / 3f) / 2), guiTopAbsolute + 20, fontRendererObj, playerData);
 
         GlStateManager.popMatrix();
     }
@@ -379,7 +375,7 @@ public class PVGui extends GuiScreen {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        searchBox.handleMouseInput(scaledMouseX, scaledMouseY, guiLeftAbsolute + ((30 * 2f/3f) * configScale / 2) - 0.5f, guiTopAbsolute + ((594 * 2f/3f) * configScale / 2) + 0.5f, (310f * 2f/3f) * configScale / 2, (59 * 2f/3f) * configScale / 2, mouseButton);
+        searchBox.handleMouseInput(scaledMouseX, scaledMouseY, guiLeftAbsolute + ((30 * 2f / 3f) * configScale / 2) - 0.5f, guiTopAbsolute + ((594 * 2f / 3f) * configScale / 2) + 0.5f, (310f * 2f / 3f) * configScale / 2, (59 * 2f / 3f) * configScale / 2, mouseButton);
     }
 
     public void cycleCategories() {

@@ -15,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,41 +24,43 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class ModrinthUpdater {
-    public static final String pfx = BedwarsMod.prefix;
+    private final String pfx;
 
-    private static final String MODRINTH_API_URL = "https://api.modrinth.com/v2/project/bedwars-mod/version";
-    private static String latestVersion;
-    private static String downloadUrl;
-    private static boolean hasPromptedUpdate = false;
+    public ModrinthUpdater(String modPrefix) {
+        this.pfx = modPrefix;
+    }
 
-    public static boolean isOutdated = false;
+    private String latestVersion;
+    private String downloadUrl;
+    private boolean hasPromptedUpdate = false;
 
-    public static void init() {
-        MinecraftForge.EVENT_BUS.register(new ModrinthUpdater());
+    public boolean isOutdated = false;
+
+    public void init() {
+        MinecraftForge.EVENT_BUS.register(new ModrinthUpdater(pfx));
         checkForUpdates();
     }
 
-    private static String changelog = "";
+    private String changelog = "";
 
-    public static void checkForUpdates() {
+    public void checkForUpdates() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(MODRINTH_API_URL)
-                .header("User-Agent", ("errorPNF/BedwarsMod/" + BedwarsMod.VERSION))
-                .build();
+        String MODRINTH_API_URL = "https://api.modrinth.com/v2/project/bedwars-mod/version";
+        Request request = new Request.Builder().url(MODRINTH_API_URL).header("User-Agent", ("errorPNF/BedwarsMod/" + BedwarsMod.VERSION)).build();
         CompletableFuture<JsonObject> future = new CompletableFuture<>();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 future.completeExceptionally(e);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
                     future.completeExceptionally(new IOException("Unexpected code " + response));
                     UChat.chat("&cAn unexpected error occurred during the API request.");
@@ -65,7 +68,7 @@ public class ModrinthUpdater {
                 }
 
                 try {
-                    String jsonResponse = response.body().string(); // get raw JSON
+                    String jsonResponse = Objects.requireNonNull(response.body()).string(); // get raw JSON
                     JsonArray jsonArray = new JsonParser().parse(jsonResponse).getAsJsonArray();
                     List<JsonObject> jsonObjects = new ArrayList<>();
                     for (JsonElement element : jsonArray) {
@@ -74,8 +77,7 @@ public class ModrinthUpdater {
                     // Get the first (latest) version object
                     JsonObject latestVersionObj = jsonObjects.get(0);
                     latestVersion = latestVersionObj.get("version_number").getAsString();
-                    changelog = latestVersionObj.get("changelog").getAsString()
-                            .replaceAll("\n", "\n§7"); // format changelog properly
+                    changelog = latestVersionObj.get("changelog").getAsString().replaceAll("\n", "\n§7"); // format changelog properly
                     downloadUrl = "https://modrinth.com/mod/bedwars-mod/version/" + latestVersion; // direct link to latest version page
 
                     String currentVersion = BedwarsMod.VERSION;
@@ -117,7 +119,7 @@ public class ModrinthUpdater {
         UChat.chat(pfx + "&cBedwars Mod v" + currentVersion + " &b-> " + "&aBedwars Mod v" + latestVersion);
     }
 
-    private static String getJsonFromUrl(String urlString) throws IOException {
+    private String getJsonFromUrl(String urlString) throws IOException {
         URL url = new URL(urlString);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();

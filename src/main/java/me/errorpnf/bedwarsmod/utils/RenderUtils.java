@@ -5,7 +5,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.Shader;
@@ -38,7 +41,6 @@ public class RenderUtils extends GuiScreen {
         //Utils.setScreen(width, height, f);
         blurOutputVert.unbindFramebufferTexture();
     }
-
 
     public static void drawTexturedRect(float x, float y, float width, float height, int filter) {
         drawTexturedRect(x, y, width, height, 0, 1, 0, 1, filter);
@@ -283,10 +285,10 @@ public class RenderUtils extends GuiScreen {
             bottom = i;
         }
 
-        float f = (float)(color >> 24 & 255) / 255.0F;
-        float g = (float)(color >> 16 & 255) / 255.0F;
-        float h = (float)(color >> 8 & 255) / 255.0F;
-        float j = (float)(color & 255) / 255.0F;
+        float f = (float) (color >> 24 & 255) / 255.0F;
+        float g = (float) (color >> 16 & 255) / 255.0F;
+        float h = (float) (color >> 8 & 255) / 255.0F;
+        float j = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldRenderer = tessellator.getWorldRenderer();
         GlStateManager.enableBlend();

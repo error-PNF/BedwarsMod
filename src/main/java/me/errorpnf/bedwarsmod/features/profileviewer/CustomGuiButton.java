@@ -4,8 +4,6 @@ import me.errorpnf.bedwarsmod.utils.RenderUtils;
 import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -55,7 +53,7 @@ public class CustomGuiButton {
         int sizeY = 224;
 
         RenderUtils.drawTexturedRect(guiLeft, guiTop, sizeX, sizeY, GL11.GL_NEAREST);
-        RenderUtils.drawStringCentered(fontRenderer, FormatUtils.format(text), x + (width/ 2), y + (height / 2) + 0.5f, true, 0);
+        RenderUtils.drawStringCentered(fontRenderer, FormatUtils.format(text), x + (width / 2), y + (height / 2) + 0.5f, true, 0);
     }
 
     private boolean isMouseOver(float mouseX, float mouseY, float x, float y, float width, float height) {

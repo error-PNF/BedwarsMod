@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class PrestigeList {
     private final Map<Integer, PrestigeInfo> prestiges = new HashMap<>();
@@ -19,7 +20,7 @@ public class PrestigeList {
 
     private void loadPrestiges() {
         // Load the JSON file from resources
-        try (Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/bedwarsmod/data/prestiges.json"))) {
+        try (Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("assets/bedwarsmod/data/prestiges.json")))) {
             if (reader == null) {
                 throw new IllegalArgumentException("File not found: assets/bedwarsmod/data/prestiges.json");
             }
@@ -67,9 +68,6 @@ public class PrestigeList {
         }
     }
 
-
-
-
     private String formatPrestige(int level, PrestigeInfo info) {
         StringBuilder sb = new StringBuilder();
 
@@ -84,11 +82,11 @@ public class PrestigeList {
 
             if (i == 0) {
                 sb.append(info.colors.numberColors[0]);
-            } else if (i == 1 && len > 1) {
+            } else if (i == 1) {
                 sb.append(info.colors.numberColors[1]);
-            } else if (i == 2 && len > 2) {
+            } else if (i == 2) {
                 sb.append(info.colors.numberColors[2]);
-            } else if (i == 3 && len > 3) {
+            } else if (i == 3) {
                 sb.append(info.colors.numberColors[3]);
             }
             sb.append(digit);

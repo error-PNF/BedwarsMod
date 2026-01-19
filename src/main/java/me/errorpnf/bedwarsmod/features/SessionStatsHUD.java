@@ -18,7 +18,6 @@ public class SessionStatsHUD extends TextHud {
     @Exclude
     public static boolean queueReset = false;
 
-
     // this fixes some weird bug I ran into causing the SessionStats class to get registered twice, giving me some unfavorable problems.
     // I had to do this because the SessionStatsHUD class was getting registered twice and couldn't figure out why, so I just stopped the SessionStats from getting double registered.
     @Exclude
@@ -149,12 +148,12 @@ public class SessionStatsHUD extends TextHud {
     @Override
     public boolean shouldShow() {
         if (BedwarsModConfig.onlyShowHUDWhileInGame) {
-            if (HypixelLocraw.getIsInBedwarsGameLocraw()) {
+            if (HypixelLocraw.isInBedwarsGame()) {
                 super.shouldShow();
                 return true;
             } else {
                 if (BedwarsModConfig.showHUDInBedwarsLobby) {
-                    if (HypixelLocraw.getIsInBedwarsLobby()) {
+                    if (HypixelLocraw.isInBedwarsLobby()) {
                         super.shouldShow();
                         return true;
                     } else {

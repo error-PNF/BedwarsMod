@@ -60,34 +60,13 @@ public class Stats {
 
     public int skillIndex;
 
-    private static final Map<GameModeEnum, String> statPrefixes = new HashMap<>();
-
-    static {
-        statPrefixes.put(GameModeEnum.OVERALL, "");
-        statPrefixes.put(GameModeEnum.EIGHT_ONE, "eight_one_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO, "eight_two_");
-        statPrefixes.put(GameModeEnum.FOUR_THREE, "four_three_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR, "four_four_");
-        statPrefixes.put(GameModeEnum.TWO_FOUR, "two_four_");
-        statPrefixes.put(GameModeEnum.CASTLE, "castle_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_LUCKY, "eight_two_lucky_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_LUCKY, "four_four_lucky_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_RUSH, "eight_two_rush_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_RUSH, "four_four_rush_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_VOIDLESS, "eight_two_voidless_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_VOIDLESS, "four_four_voidless_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_ARMED, "eight_two_armed_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_ARMED, "four_four_armed_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_ULTIMATE, "eight_two_ultimate_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_ULTIMATE, "four_four_ultimate_");
-        statPrefixes.put(GameModeEnum.EIGHT_TWO_SWAP, "eight_two_swap_");
-        statPrefixes.put(GameModeEnum.FOUR_FOUR_SWAP, "four_four_swap_");
-    }
+    private  final Map<GameModeEnum, String> statPrefixes = new HashMap<>();
 
     public Stats(JsonObject apiReq, GameModeEnum gameMode) {
         this.apiReq = apiReq;
         this.statUtils = new StatUtils(apiReq);
         this.prestigeList = new PrestigeList();
+        this.registerStatsPrefixes();
 
         this.displayUsername = statUtils.getStat("player.displayname");
         this.level = Integer.parseInt(statUtils.getStat("player.achievements.bedwars_level"));
@@ -119,7 +98,6 @@ public class Stats {
         } else if (gameMode == GameModeEnum.OVERALL_SWAP) {
             addCombinedStats("eight_two_swap_", "four_four_swap_");
         }
-
 
         this.gamesPlayed = wins + losses;
 
@@ -170,6 +148,28 @@ public class Stats {
         this.deaths += getStat(prefix1 + "deaths_bedwars") + getStat(prefix2 + "deaths_bedwars");
         this.beds += getStat(prefix1 + "beds_broken_bedwars") + getStat(prefix2 + "beds_broken_bedwars");
         this.bedsLost += getStat(prefix1 + "beds_lost_bedwars") + getStat(prefix2 + "beds_lost_bedwars");
+    }
+
+    private void registerStatsPrefixes() {
+        statPrefixes.put(GameModeEnum.OVERALL, "");
+        statPrefixes.put(GameModeEnum.EIGHT_ONE, "eight_one_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO, "eight_two_");
+        statPrefixes.put(GameModeEnum.FOUR_THREE, "four_three_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR, "four_four_");
+        statPrefixes.put(GameModeEnum.TWO_FOUR, "two_four_");
+        statPrefixes.put(GameModeEnum.CASTLE, "castle_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_LUCKY, "eight_two_lucky_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_LUCKY, "four_four_lucky_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_RUSH, "eight_two_rush_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_RUSH, "four_four_rush_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_VOIDLESS, "eight_two_voidless_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_VOIDLESS, "four_four_voidless_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_ARMED, "eight_two_armed_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_ARMED, "four_four_armed_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_ULTIMATE, "eight_two_ultimate_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_ULTIMATE, "four_four_ultimate_");
+        statPrefixes.put(GameModeEnum.EIGHT_TWO_SWAP, "eight_two_swap_");
+        statPrefixes.put(GameModeEnum.FOUR_FOUR_SWAP, "four_four_swap_");
     }
 
     public static int calculateSkillIndex(double fkdr, double stars) {

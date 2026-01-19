@@ -1,7 +1,10 @@
 package me.errorpnf.bedwarsmod.data;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.scoreboard.*;
+import net.minecraft.scoreboard.Score;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.ScorePlayerTeam;
+import net.minecraft.scoreboard.Scoreboard;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -71,7 +74,6 @@ public class BedwarsGameTeamStatus {
         }
         return "";
     }
-
 
     private String findTeamColor(String input) {
         for (String color : TEAM_COLORS) {

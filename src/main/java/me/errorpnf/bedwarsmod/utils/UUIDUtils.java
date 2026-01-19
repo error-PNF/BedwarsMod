@@ -7,8 +7,8 @@ import java.util.UUID;
  */
 public final class UUIDUtils {
 
-    private static final String UUID_REGEX             = "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}";
-    private static final String TRIMMED_UUID_REGEX     = "[a-f0-9]{12}4[a-f0-9]{3}[89aAbB][a-f0-9]{15}";
+    private static final String UUID_REGEX = "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}";
+    private static final String TRIMMED_UUID_REGEX = "[a-f0-9]{12}4[a-f0-9]{3}[89aAbB][a-f0-9]{15}";
     private static final String ADD_UUID_HYPHENS_REGEX = "([a-f0-9]{8})([a-f0-9]{4})(4[a-f0-9]{3})([89aAbB][a-f0-9]{3})([a-f0-9]{12})";
 
     private UUIDUtils() {

@@ -8,7 +8,8 @@ import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;
 import net.minecraft.client.gui.FontRenderer;
 
 public class CornerCard {
-    public CornerCard() {}
+    public CornerCard() {
+    }
 
     public void drawCard(float x, float y, FontRenderer fontRenderer, JsonObject jsonObject) {
         StatUtils stats = new StatUtils(jsonObject);

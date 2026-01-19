@@ -26,15 +26,13 @@ public class ApiCacheManager {
     }
 
     public static JsonObject getCachedRequest(String username) {
-        for (CachedRequest cachedRequest : cache.values()) {
-            if (cachedRequest.username.equalsIgnoreCase(username)) {
-                long currentTime = System.currentTimeMillis();
-                if (currentTime - cachedRequest.timestamp < CACHE_DURATION) {
-                    return cachedRequest.data;
-                } else {
-                    cache.remove(cachedRequest.username.toLowerCase());
-                    break;
-                }
+        CachedRequest cachedRequest = cache.get(username.toLowerCase());
+        if (cachedRequest != null) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - cachedRequest.timestamp < CACHE_DURATION) {
+                return cachedRequest.data;
+            } else {
+                cache.remove(cachedRequest.username.toLowerCase());
             }
         }
         return null;

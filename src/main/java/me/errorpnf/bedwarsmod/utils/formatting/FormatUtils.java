@@ -22,7 +22,8 @@ public class FormatUtils {
     }
 
     public static String formatCommas(Number number) {
-        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+        // European countries tend to use comma over decimal for dividers. Allow for system preference over hard coded US locale.
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
         return formatter.format(number);
     }
 

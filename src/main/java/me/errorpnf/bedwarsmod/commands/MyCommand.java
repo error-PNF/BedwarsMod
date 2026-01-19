@@ -26,7 +26,6 @@ public class MyCommand extends CommandBase {
         return true;
     }
 
-
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         MixinGuiPlayerTabOverlay tabData = (MixinGuiPlayerTabOverlay) Minecraft.getMinecraft().ingameGUI.getTabList();

@@ -3,10 +3,10 @@ package me.errorpnf.bedwarsmod.commands;
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
 import me.errorpnf.bedwarsmod.BedwarsMod;
-import me.errorpnf.bedwarsmod.utils.ApiUtils;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
 import me.errorpnf.bedwarsmod.data.PrestigeList;
 import me.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
+import me.errorpnf.bedwarsmod.utils.ApiUtils;
 import me.errorpnf.bedwarsmod.utils.StatUtils;
 import me.errorpnf.bedwarsmod.utils.formatting.PrintChatStats;
 import me.errorpnf.bedwarsmod.utils.formatting.RankUtils;
@@ -75,7 +75,8 @@ public class BedwarsChatStats extends CommandBase {
             PrintChatStats.printChatStats(username, cachedData, gamemode);
         } else {
             UChat.chat("&aFetching Stats for &3" + username + "&a...");
-            ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
+            ApiUtils apiUtils = new ApiUtils();
+            apiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
                 ApiCacheManager.cacheRequest(username, jsonObject);
 
                 PrintChatStats.printChatStats(username, jsonObject, gamemode);
@@ -107,7 +108,7 @@ public class BedwarsChatStats extends CommandBase {
         String formattedStar = prestigeList.getPrestige(Integer.parseInt(s.getStat("player.achievements.bedwars_level")));
 
         UChat.chat(pfx + "&7Overall stats for " + RankUtils.formatRankAndUsername(username, jsonObject));
-        UChat.chat(pfx + "&7Bedwars Level: &a" +  formattedStar);
+        UChat.chat(pfx + "&7Bedwars Level: &a" + formattedStar);
         UChat.chat(pfx + "&7Bedwars Kills: &a" + s.getStat("player.stats.Bedwars.kills_bedwars"));
         UChat.chat(pfx + "&7Bedwars Deaths: &a" + s.getStat("player.stats.Bedwars.deaths_bedwars"));
         UChat.chat(pfx + "&7Bedwars Wins: &a" + s.getStat("player.achievements.bedwars_wins"));

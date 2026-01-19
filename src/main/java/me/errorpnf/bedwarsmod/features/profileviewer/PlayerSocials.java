@@ -2,7 +2,6 @@ package me.errorpnf.bedwarsmod.features.profileviewer;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
-import me.errorpnf.bedwarsmod.config.BedwarsModConfig;
 import me.errorpnf.bedwarsmod.utils.RenderUtils;
 import me.errorpnf.bedwarsmod.utils.StatUtils;
 import me.errorpnf.bedwarsmod.utils.formatting.FormatUtils;

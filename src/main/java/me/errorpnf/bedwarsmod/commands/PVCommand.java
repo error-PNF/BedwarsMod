@@ -2,12 +2,12 @@ package me.errorpnf.bedwarsmod.commands;
 
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import com.google.gson.JsonObject;
-import me.errorpnf.bedwarsmod.utils.ApiUtils;
 import me.errorpnf.bedwarsmod.BedwarsMod;
 import me.errorpnf.bedwarsmod.data.GameModeEnum;
 import me.errorpnf.bedwarsmod.data.apicache.ApiCacheManager;
-import me.errorpnf.bedwarsmod.utils.StatUtils;
 import me.errorpnf.bedwarsmod.features.profileviewer.PVGui;
+import me.errorpnf.bedwarsmod.utils.ApiUtils;
+import me.errorpnf.bedwarsmod.utils.StatUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.command.CommandBase;
@@ -53,10 +53,11 @@ public class PVCommand extends CommandBase {
             StatUtils s = new StatUtils(cachedData);
             String displayUsername = s.getStat("player.displayname");
 
-            BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, cachedData, gamemode);
+            BedwarsMod.getInstance().openGui = new PVGui(displayUsername, cachedData, gamemode);
         } else {
             UChat.chat("&aFetching stats for &3" + username + "&a...");
-            ApiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
+            ApiUtils apiUtils = new ApiUtils();
+            apiUtils.hypixelApiRequest(username).thenAccept(jsonObject -> {
                 if (jsonObject != null) {
                     StatUtils s = new StatUtils(jsonObject);
                     if (!s.getStat("player.displayname").equals("Stat not found")) {
@@ -64,7 +65,7 @@ public class PVCommand extends CommandBase {
 
                         String displayUsername = s.getStat("player.displayname");
 
-                        BedwarsMod.INSTANCE.openGui = new PVGui(displayUsername, jsonObject, gamemode);
+                        BedwarsMod.getInstance().openGui = new PVGui(displayUsername, jsonObject, gamemode);
                     } else {
                         UChat.chat("&cError fetching data for &a" + username + "&c. Did you spell their username correctly?");
                     }

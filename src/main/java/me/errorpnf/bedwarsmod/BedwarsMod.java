@@ -31,12 +31,18 @@ public class BedwarsMod {
     // Sets the variables from `gradle.properties`. See the `blossom` config in `build.gradle.kts`.
     @Mod.Instance(MODID)
     public static BedwarsMod INSTANCE; // Adds the instance of the mod, so we can access other variables.
-    public static BedwarsModConfig config;
+
+    public static BedwarsMod getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new BedwarsMod();
+        }
+        return INSTANCE;
+    }
 
     // Register the config and commands.
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
-        config = new BedwarsModConfig();
+        BedwarsModConfig config = new BedwarsModConfig();
 
         ClientCommandHandler.instance.registerCommand(new BedwarsModCommand());
         ClientCommandHandler.instance.registerCommand(new MyCommand());
@@ -47,17 +53,16 @@ public class BedwarsMod {
         MinecraftForge.EVENT_BUS.register(new FinalKillHearts());
         MinecraftForge.EVENT_BUS.register(new BedwarsGameTeamStatus());
         //MinecraftForge.EVENT_BUS.register(new ClickChatForStats());
-        EventManager.INSTANCE.register(new HypixelLocraw());
 
+        ModrinthUpdater modrinthUpdater = new ModrinthUpdater(prefix);
+        EventManager.INSTANCE.register(modrinthUpdater);
 
-        EventManager.INSTANCE.register(new ModrinthUpdater());
-
-        ModrinthUpdater.init();
-//        UpdateManager.init();
+        modrinthUpdater.init();
+        // UpdateManager.init();
     }
 
     @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
+    public void onTick(TickEvent.ClientTickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
         if (Minecraft.getMinecraft().thePlayer == null) {
             openGui = null;
